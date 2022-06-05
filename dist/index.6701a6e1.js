@@ -961,7 +961,13 @@ class MyBooksApplication extends _reactDefault.default.Component {
                 lineNumber: 17
             },
             __self: this,
-            children: "Hello World"
+            children: /*#__PURE__*/ _jsxRuntime.jsx(_mainView.MainView, {
+                __source: {
+                    fileName: "src/index.jsx",
+                    lineNumber: 18
+                },
+                __self: this
+            })
         }));
     }
     componentDidMount() {
