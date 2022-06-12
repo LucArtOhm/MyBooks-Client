@@ -25190,7 +25190,7 @@ class MainView extends _reactDefault.default.Component {
             books: [],
             selectedBook: null,
             user: null,
-            showRegistrationForm: false // This will help to toggle the registration view
+            registered: null // This will help to toggle the registration view
         };
     }
     componentDidMount() {
@@ -25213,29 +25213,29 @@ class MainView extends _reactDefault.default.Component {
             user
         });
     }
-    onRegistration(user) {
+    onRegistration(registered) {
         this.setState({
-            user
-        });
-    }
-    toggleRegisterView(e) {
-        e.preventDefault();
-        this.setState({
-            showRegistrationForm: !this.state.showRegistrationForm,
-            user: !this.state.user
+            registered
         });
     }
     render() {
-        const { books , selectedBook , user , showRegistrationForm  } = this.state;
+        const { books , selectedBook , user , registered  } = this.state;
         // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView
         if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
             onLoggedIn: (user1)=>this.onLoggedIn(user1)
             ,
-            clickHandler: (e)=>this.toggleRegisterView(e)
+            __source: {
+                fileName: "src/components/main-view/main-view.jsx",
+                lineNumber: 59
+            },
+            __self: this
+        }));
+        if (!registered) return(/*#__PURE__*/ _jsxRuntime.jsx(_registrationView.RegistrationView, {
+            onRegistration: (registered1)=>this.onRegistration(registered1)
             ,
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 67
+                lineNumber: 62
             },
             __self: this
         }));
@@ -25244,18 +25244,7 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 70
-            },
-            __self: this
-        }));
-        if (!showRegistrationForm) return(/*#__PURE__*/ _jsxRuntime.jsx(_registrationView.RegistrationView, {
-            onRegistration: (user1)=>this.onRegistration(user1)
-            ,
-            clickHandler: (e)=>this.toggleRegisterView(e)
-            ,
-            __source: {
-                fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 72
+                lineNumber: 65
             },
             __self: this
         }));
@@ -25263,7 +25252,7 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 75
+                lineNumber: 68
             },
             __self: this,
             children: selectedBook ? /*#__PURE__*/ _jsxRuntime.jsx(_bookView.BookView, {
@@ -25273,7 +25262,7 @@ class MainView extends _reactDefault.default.Component {
                 },
                 __source: {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 78
+                    lineNumber: 71
                 },
                 __self: this
             }) : books.map((book)=>/*#__PURE__*/ _jsxRuntime.jsx(_bookCard.BookCard, {
@@ -25283,7 +25272,7 @@ class MainView extends _reactDefault.default.Component {
                     },
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 80
+                        lineNumber: 73
                     },
                     __self: this
                 }, book._id)
@@ -28507,11 +28496,12 @@ function RegistrationView(props) {
     const [password, setPassword] = _react.useState('');
     const [email, setEmail] = _react.useState('');
     const [birthday, setBirthday] = _react.useState('');
-    /*   const handleRegistration = (e) => {
-      e.preventDefault();
-      console.log(username, password, email, birthday);
-      props.onRegistration(username);
-    }; */ return(/*#__PURE__*/ _jsxRuntime.jsxs("form", {
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        console.log(username, password, email, birthday);
+        props.onRegistration(username);
+    };
+    return(/*#__PURE__*/ _jsxRuntime.jsxs("form", {
         __source: {
             fileName: "src/components/registration-view/registration-view.jsx",
             lineNumber: 18
@@ -28604,24 +28594,13 @@ function RegistrationView(props) {
             }),
             /*#__PURE__*/ _jsxRuntime.jsx("button", {
                 type: "submit",
-                onClick: (e)=>console.log('Submit Form')
-                ,
+                onClick: handleSubmit,
                 __source: {
                     fileName: "src/components/registration-view/registration-view.jsx",
                     lineNumber: 35
                 },
                 __self: this,
                 children: "Submit"
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx("button", {
-                onClick: (e)=>props.clickHandler(e)
-                ,
-                __source: {
-                    fileName: "src/components/registration-view/registration-view.jsx",
-                    lineNumber: 36
-                },
-                __self: this,
-                children: "Go to Sign In"
             })
         ]
     }));
@@ -28629,7 +28608,7 @@ function RegistrationView(props) {
 _s(RegistrationView, "tdA1KK8yaZidqYo0wscqshHt/KE=");
 _c = RegistrationView;
 RegistrationView.propTypes = {
-    register: _propTypesDefault.default.shape({
+    registered: _propTypesDefault.default.shape({
         Username: _propTypesDefault.default.string.isRequired,
         Password: _propTypesDefault.default.string.isRequired,
         Email: _propTypesDefault.default.string.isRequired,
@@ -29634,7 +29613,7 @@ function LoginView(props) {
                     lineNumber: 26
                 },
                 __self: this,
-                children: "Submit"
+                children: "Login"
             }),
             /*#__PURE__*/ _jsxRuntime.jsx("button", {
                 onClick: (e)=>props.clickHandler(e)
@@ -29644,7 +29623,7 @@ function LoginView(props) {
                     lineNumber: 27
                 },
                 __self: this,
-                children: "Register Here"
+                children: "Sign up!"
             })
         ]
     }));
@@ -29656,7 +29635,7 @@ LoginView.propTypes = {
         Username: _propTypesDefault.default.string.isRequired,
         Password: _propTypesDefault.default.string.isRequired
     }),
-    onLogin: _propTypesDefault.default.func
+    onLoggedIn: _propTypesDefault.default.func
 };
 var _c;
 $RefreshReg$(_c, "LoginView");
@@ -29761,6 +29740,7 @@ class BookView extends _reactDefault.default.Component {
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
+                        crossOrigin: "anonymous",
                         src: book.CoverURL,
                         __source: {
                             fileName: "src/components/book-view/book-view.jsx",
@@ -29812,7 +29792,7 @@ class BookView extends _reactDefault.default.Component {
                                 lineNumber: 20
                             },
                             __self: this,
-                            children: "Description:"
+                            children: "Description: "
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx("span", {
                             className: "value",
@@ -29822,8 +29802,7 @@ class BookView extends _reactDefault.default.Component {
                             },
                             __self: this,
                             children: book.Description
-                        }),
-                        ";"
+                        })
                     ]
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsxs("div", {
@@ -29841,7 +29820,7 @@ class BookView extends _reactDefault.default.Component {
                                 lineNumber: 24
                             },
                             __self: this,
-                            children: "Author:"
+                            children: "Author: "
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx("span", {
                             className: "value",
@@ -29851,8 +29830,7 @@ class BookView extends _reactDefault.default.Component {
                             },
                             __self: this,
                             children: book.Author.Name
-                        }),
-                        ";"
+                        })
                     ]
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsxs("div", {
@@ -29870,7 +29848,7 @@ class BookView extends _reactDefault.default.Component {
                                 lineNumber: 28
                             },
                             __self: this,
-                            children: "Illustrator:"
+                            children: "Illustrator: "
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx("span", {
                             className: "value",
@@ -29880,8 +29858,7 @@ class BookView extends _reactDefault.default.Component {
                             },
                             __self: this,
                             children: book.Illustrator
-                        }),
-                        ";"
+                        })
                     ]
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx("button", {

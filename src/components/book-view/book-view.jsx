@@ -10,23 +10,23 @@ export class BookView extends React.Component {
     return (
       <div className='book-view'>
         <div className='book-cover'>
-          <img src={book.CoverURL} />
+          <img crossOrigin="anonymous" src={book.CoverURL} />
         </div>
         <div className='book-title'>
           <span className='label'>Title: </span>
           <span className='value'>{book.Title}</span>
         </div>
         <div className='book-description'>
-          <span className='label'>Description:</span>
-          <span className='value'>{book.Description}</span>;
+          <span className='label'>Description: </span>
+          <span className='value'>{book.Description}</span>
         </div>
         <div className='book-author'>
-          <span className='label'>Author:</span>
-          <span className='value'>{book.Author.Name}</span>;
+          <span className='label'>Author: </span>
+          <span className='value'>{book.Author.Name}</span>
         </div>
         <div className='book-illustrator'>
-          <span className='label'>Illustrator:</span>
-          <span className='value'>{book.Illustrator}</span>;
+          <span className='label'>Illustrator: </span>
+          <span className='value'>{book.Illustrator}</span>
         </div>
         <button onClick={() => { onBackClick(null); }}>Back</button>
       </div>

@@ -15,7 +15,7 @@ export class MainView extends React.Component {
       books: [],
       selectedBook: null,
       user: null,
-      showRegistrationForm: false // This will help to toggle the registration view
+      registered: null // This will help to toggle the registration view
     };
   }
 
@@ -44,32 +44,25 @@ export class MainView extends React.Component {
     });
   }
 
-  onRegistration(user) {
+  onRegistration(registered) {
     this.setState({
-      user
-    })
-  }
-
-  toggleRegisterView(e) {
-    e.preventDefault();
-    this.setState({
-      showRegistrationForm: !this.state.showRegistrationForm,
-      user: !this.state.user
+      registered
     })
   }
 
   render() {
-    const { books, selectedBook, user, showRegistrationForm } = this.state;
+    const { books, selectedBook, user, registered } = this.state;
 
     // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView
 
     if (!user) {
-      return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} clickHandler={(e) => this.toggleRegisterView(e)} />;
+      return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
     }
+
+    if (!registered) return <RegistrationView onRegistration={(registered) => this.onRegistration(registered)} />;
+
     // Before the books have been loaded
     if (books.length === 0) return <div className='main-view' />;
-
-    if (!showRegistrationForm) return <RegistrationView onRegistration={(user) => this.onRegistration(user)} clickHandler={(e) => this.toggleRegisterView(e)} />;
 
     return (
       <div className='main-view'>
