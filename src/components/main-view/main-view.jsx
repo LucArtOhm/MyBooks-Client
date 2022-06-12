@@ -1,32 +1,72 @@
 import React from 'react';
+import axios from 'axios';
+
+// Add components
+import { RegistrationView } from '../registration-view/registration-view';
+import { LoginView } from '../login-view/login-view';
 import { BookCard } from '../book-card/book-card';
 import { BookView } from '../book-view/book-view';
 
 export class MainView extends React.Component {
   constructor() {
     super();
+    // Initial state is set to null
     this.state = {
-      books: [
-        { _id: 1, Title: 'The extraordinary life of Alan Turing', Description: 'The story of Alan Turing is portrayed', CoverURL: 'https://www.penguin.co.uk/content/dam/prh/books/316/316558/9780241434017.jpg.transform/PRHDesktopWide_small/image.jpg' },
-        { _id: 2, Title: 'The Christmas Truck', Description: 'A Christmas story full of adventure with Papa, Dad, an amzing kid, and grandma.', CoverURL: 'https://images.booksense.com/images/408/743/9780990743408.jpg' },
-        { _id: 3, Title: 'And Tango Makes Three', Description: 'The true story of two male pinguins who became fathers in NYC', CoverURL: 'https://img.buzzfeed.com/buzzfeed-static/static/2020-02/19/20/asset/9bc4c1b086f2/sub-buzz-374-1582143100-10.jpg?downsize=600:*&output-format=auto&output-quality=auto' }
-      ]
-    }
+      books: [],
+      selectedBook: null,
+      user: null,
+      registered: null // This will help to toggle the registration view
+    };
   }
 
-  setSelectedBook(newSelectedBook) {
+  componentDidMount() {
+    axios.get('https://your-favorite-books.herokuapp.com/books')
+      .then(response => {
+        this.setState({
+          books: response.data
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  // When a book is clicked, this function is invoked and updates the state of the `selectedBook` property to that book
+  setSelectedBook(book) {
     this.setState({
-      selectedBook: newSelectedBook
+      selectedBook: book
     });
   }
 
-  render() {
-    const { books, selectedBook } = this.state;
+  onLoggedIn(user) {
+    this.setState({
+      user
+    });
+  }
 
-    if (books.length === 0) return <div className='main-view'>The list is empty!</div>;
+  onRegistration(registered) {
+    this.setState({
+      registered
+    })
+  }
+
+  render() {
+    const { books, selectedBook, user, registered } = this.state;
+
+    // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView
+
+    if (!user) {
+      return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
+    }
+
+    if (!registered) return <RegistrationView onRegistration={(registered) => this.onRegistration(registered)} />;
+
+    // Before the books have been loaded
+    if (books.length === 0) return <div className='main-view' />;
 
     return (
       <div className='main-view'>
+
         {selectedBook
           ? <BookView book={selectedBook} onBackClick={newSelectedBook => { this.setSelectedBook(newSelectedBook); }} />
           : books.map(book => (
