@@ -1,12 +1,21 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap/Card';
 
 export class BookCard extends React.Component {
   render() {
     const { book, onBookClick } = this.props;
 
     return (
-      <div onClick={() => onBookClick(book)} className='book-card'>{book.Title}</div>
+      <Card>
+        <Card.Img variant='top' src={book.CoverURL} />
+        <Card.Body>
+          <Card.Title>{book.Title}</Card.Title>
+          <Card.Text>{book.Description}</Card.Text>
+          <Button onClick={() => onBookClick(book)} variant='link'>Open</Button>
+        </Card.Body>
+      </Card>
     );
   }
 }
