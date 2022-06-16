@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import { Card } from 'react-bootstrap/Card';
+import { Card } from 'react-bootstrap';
 
 export class BookCard extends React.Component {
   render() {
@@ -9,7 +9,7 @@ export class BookCard extends React.Component {
 
     return (
       <Card>
-        <Card.Img variant='top' src={book.CoverURL} />
+        <Card.Img variant='top' crossOrigin='Anonymous' src={book.CoverURL} />
         <Card.Body>
           <Card.Title>{book.Title}</Card.Title>
           <Card.Text>{book.Description}</Card.Text>

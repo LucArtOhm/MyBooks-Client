@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Form from 'react-bootstrap/Form';
-import { Button } from "react-bootstrap";
+import { Button, Card, Container, Col, Row, Form } from "react-bootstrap";
 import propTypes from "prop-types";
+
+import './login-view.scss'
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -10,24 +12,36 @@ export function LoginView(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(username, password);
-    // Send a request to the server for authentication
-    // Then call props.onLoggedIn(username)
+    // Send a request to the server for authentication, then call props.onLoggedIn(username)
     props.onLoggedIn(username);
   };
 
   return (
-    <Form>
-      <Form.Group controlId='formUsername'>
-        <Form.Label>Username:</Form.Label>
-        <Form.Control type='text' onChange={e => setUsername(e.target.value)} />
-      </Form.Group>
+    <Container>
+      <Row>
+        <Col></Col>
+        <Col>
+          <Card style={{ margin: 100, width: 30 }}>
+            <Card.Body>
+              <Card.Title style={{ textAlign: 'center', fontSize: '6r' }} />
+              <Form className='login-border'>
+                <Form.Group controlId='formUsername'>
+                  <Form.Label>Username:</Form.Label>
+                  <Form.Control type='text' placeholder='Enter Username' onChange={e => setUsername(e.target.value)} />
+                </Form.Group>
 
-      <Form.Group controlId='formPassword'>
-        <Form.Label>Password:</Form.Label>
-        <Form.Control type='password' onChange={e => setPassword(e.target.value)} />
-      </Form.Group>
-      <Button variant='primary' type='submit' onClick={handleSubmit}>Submit</Button>
-    </Form>
+                <Form.Group controlId='formPassword'>
+                  <Form.Label>Password:</Form.Label>
+                  <Form.Control type='password' placeholder='Enter Password' onChange={e => setPassword(e.target.value)} />
+                </Form.Group>
+                <Button variant='primary' type='submit' size='lg' onClick={handleSubmit}>Submit</Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col></Col>
+      </Row >
+    </Container >
   );
 }
 

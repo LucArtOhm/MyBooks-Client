@@ -6,6 +6,9 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
 import { BookCard } from '../book-card/book-card';
 import { BookView } from '../book-view/book-view';
+import { Container, Row, Col } from 'react-bootstrap';
+
+import './main-view.scss'
 
 export class MainView extends React.Component {
   constructor() {
@@ -65,15 +68,29 @@ export class MainView extends React.Component {
     if (books.length === 0) return <div className='main-view' />;
 
     return (
-      <div className='main-view'>
-
-        {selectedBook
-          ? <BookView book={selectedBook} onBackClick={newSelectedBook => { this.setSelectedBook(newSelectedBook); }} />
-          : books.map(book => (
-            <BookCard key={book._id} book={book} onBookClick={(book) => { this.setSelectedBook(book) }} />
-          ))
-        }
-      </div>
+      <Container>
+        <div className='main-view'>
+          {selectedBook
+            ? (
+              <Row className='main-view justify-content-md-center'>
+                <Col md={8}>
+                  <BookView book={selectedBook} onBackClick={newSelectedBook => { this.setSelectedBook(newSelectedBook); }} />
+                </Col>
+              </Row>
+            )
+            : (
+              <Row className=''>
+                {books.map(book => (
+                  <Col md={3}>
+                    <BookCard key={book._id} book={book} onBookClick={(newSelectedBook) => { this.setSelectedBook(newSelectedBook) }} />
+                  </Col>
+                ))
+                }
+              </Row>
+            )
+          }
+        </div>
+      </Container>
     );
   }
 }
