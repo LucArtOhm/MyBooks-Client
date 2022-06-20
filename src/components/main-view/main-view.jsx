@@ -73,7 +73,7 @@ export class MainView extends React.Component {
           {selectedBook
             ? (
               <Row className='main-view justify-content-md-center'>
-                <Col md={8}>
+                <Col>
                   <BookView book={selectedBook} onBackClick={newSelectedBook => { this.setSelectedBook(newSelectedBook); }} />
                 </Col>
               </Row>
@@ -81,7 +81,7 @@ export class MainView extends React.Component {
             : (
               <Row className=''>
                 {books.map(book => (
-                  <Col md={3}>
+                  <Col sm={6} md={4}>
                     <BookCard key={book._id} book={book} onBookClick={(newSelectedBook) => { this.setSelectedBook(newSelectedBook) }} />
                   </Col>
                 ))

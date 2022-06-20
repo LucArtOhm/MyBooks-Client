@@ -11,32 +11,34 @@ export class BookView extends React.Component {
     const { book, onBackClick } = this.props;
 
     return (
-      <Container>
-        <Row className='book-view'>
-          <div className='book-cover'>
-            <img crossOrigin="anonymous" src={book.CoverURL} />
-          </div>
-        </Row>
-        <Row className='book-title'>
-          <span className='label'>Title: </span>
-          <span className='value'>{book.Title}</span>
-        </Row>
-        <Row className='book-description'>
-          <span className='label'>Description: </span>
-          <span className='value'>{book.Description}</span>
-        </Row>
-        <Row className='book-author'>
-          <span className='label'>Author: </span>
-          <span className='value'>{book.Author.Name}</span>
-        </Row>
-        <Row className='book-illustrator'>
-          <span className='label'>Illustrator: </span>
-          <span className='value'>{book.Illustrator}</span>
-        </Row>
+      <Container fluid style={{ paddingTop: '.75rem' }}>
         <Row>
-          <Button onClick={() => { onBackClick(null); }}>Back</Button>
+          <CardGroup>
+            <Card>
+              <Card.Img variant='top' crossOrigin='Anonymous' src={book.CoverURL} />
+              <Card.Body>
+                <Card.Title className='book-title'>
+                  <span className='label'>Title: </span>
+                  <span className='value'>{book.Title}</span>
+                </Card.Title>
+                <Card.Text className='book-description'>
+                  <span className='label'>Description: </span>
+                  <span className='value'>{book.Description}</span>
+                </Card.Text>
+                <Card.Text className='book-author'>
+                  <span className='label'>Author: </span>
+                  <span className='value'>{book.Author.Name}</span>
+                </Card.Text>
+                <Card.Text className='book-illustrator'>
+                  <span className='label'>Illustrator: </span>
+                  <span className='value'>{book.Illustrator}</span>
+                </Card.Text>
+                <Button onClick={() => { onBackClick(null); }}>Back</Button>
+              </Card.Body>
+            </Card>
+          </CardGroup>
         </Row>
-      </Container>
+      </Container >
     )
   }
 }

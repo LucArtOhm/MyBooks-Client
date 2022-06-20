@@ -3,17 +3,19 @@ import propTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
 
+import './book-card.scss';
+
 export class BookCard extends React.Component {
   render() {
     const { book, onBookClick } = this.props;
 
     return (
-      <Card>
-        <Card.Img variant='top' crossOrigin='Anonymous' src={book.CoverURL} />
+      <Card className='book-card-wrapper, mb3'>
+        <Card.Img alt='Image of the book cover' variant='top' style={{}} crossOrigin='Anonymous' src={book.CoverURL} />
         <Card.Body>
           <Card.Title>{book.Title}</Card.Title>
           <Card.Text>{book.Description}</Card.Text>
-          <Button onClick={() => onBookClick(book)} variant='link'>Open</Button>
+          <Button variant='outline-secondary' onClick={() => onBookClick(book)} >Open</Button>
         </Card.Body>
       </Card>
     );

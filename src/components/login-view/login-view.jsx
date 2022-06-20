@@ -17,13 +17,12 @@ export function LoginView(props) {
   };
 
   return (
-    <Container>
-      <Row>
-        <Col></Col>
-        <Col>
-          <Card style={{ margin: 100, width: 30 }}>
+    <Container className='body'>
+      <Row className='justify-content-md-center'>
+        <Col md={8} className=''>
+          <Card style={{ marginTop: 100, marginBottom: 50, width: '30' }}>
             <Card.Body>
-              <Card.Title style={{ textAlign: 'center', fontSize: '6r' }} />
+              <Card.Title style={{ textAlign: 'center', fontSize: '2r' }}>Please Login</Card.Title>
               <Form className='login-border'>
                 <Form.Group controlId='formUsername'>
                   <Form.Label>Username:</Form.Label>
@@ -34,12 +33,14 @@ export function LoginView(props) {
                   <Form.Label>Password:</Form.Label>
                   <Form.Control type='password' placeholder='Enter Password' onChange={e => setPassword(e.target.value)} />
                 </Form.Group>
-                <Button variant='primary' type='submit' size='lg' onClick={handleSubmit}>Submit</Button>
-              </Form>
+              </Form><br></br>
+              <Row className='btns'>
+                <Button variant='primary' type='submit' onClick={handleSubmit}>Submit</Button>
+                <Button variant='outline-primary' type='submit' onClick={handleSubmit}>Sign up!</Button>
+              </Row>
             </Card.Body>
           </Card>
         </Col>
-        <Col></Col>
       </Row >
     </Container >
   );

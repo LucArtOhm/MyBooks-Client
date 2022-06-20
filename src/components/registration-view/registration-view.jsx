@@ -42,58 +42,56 @@ export function RegistrationView(props) {
         <Col>
           <CardGroup>
             <Card>
-              <Card.Title>Please Register!</Card.Title>
-              <Form>
-                <Form.Group>
-                  <Form.Label>Username:</Form.Label>
-                  <Form.Control
-                    type='text'
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                    placeholder='Enter a Username'
-                  />
-                </Form.Group>
-
-                <Form.Group>
-                  <Form.Label>Password:</Form.Label>
-                  <Form.Control
-                    type='text'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    minLength={8}
-                    placeholder='Your password must be 8 or more characters'
-                  />
-                </Form.Group>
-
-                <Form.Group>
-                  <Form.Label>Email:</Form.Label>
-                  <Form.Control
-                    type='text'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    placeholder='Enter your email address'
-                  />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                  </Form.Text>
-                </Form.Group>
-
-                <Form.Group>
-                  <Form.Label>Birthday:</Form.Label>
-                  <Form.Control
-                    type='text'
-                    value={birthday}
-                    onChange={(e) => setBirthday(e.target.value)}
-                    required
-                    placeholder='Enter a Birthday'
-                  />
-                </Form.Group>
-
+              <Card.Body>
+                <Card.Title>Please Register!</Card.Title>
+                <Form>
+                  <Form.Group>
+                    <Form.Label>Username:</Form.Label>
+                    <Form.Control
+                      type='text'
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                      placeholder='Enter a Username'
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Password:</Form.Label>
+                    <Form.Control
+                      type='text'
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      minLength={8}
+                      placeholder='Your password must be 8 or more characters'
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Email:</Form.Label>
+                    <Form.Control
+                      type='text'
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      placeholder='Enter your email address'
+                    />
+                    <Form.Text className="text-muted">
+                      We'll never share your email with anyone else.
+                    </Form.Text>
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Birthday:</Form.Label>
+                    <Form.Control
+                      type='text'
+                      value={birthday}
+                      onChange={(e) => setBirthday(e.target.value)}
+                      required
+                      placeholder='Enter a Birthday'
+                    />
+                  </Form.Group>
+                </Form><br></br>
                 <Button type="submit" onClick={handleSubmit}>Submit</Button>
-              </Form >
+              </Card.Body>
             </Card>
           </CardGroup>
         </Col>
