@@ -1,0 +1,42 @@
+
+/* Kids learning Tube colors
+blau: #74cada
+dark gray: #4b586a
+green: #c3d07e
+yellow: #f4e199
+pinkish: #de8689
+lightgray: #eeeeee 
+
+For the font: 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+*/
+.btns {
+  justify-Content: space-around;
+}
+.book-card-wrapper {
+  color: #4b586a;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin-bottom: 20px;
+  align-content: space-between;
+}
+
+
+/* Kids learning Tube colors
+blau: #74cada
+dark gray: #4b586a
+green: #c3d07e
+yellow: #f4e199
+pinkish: #de8689
+lightgray: #eeeeee 
+
+For the font: 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+*/
+.app-container {
+  background-color: #eeeeee;
+}
+/*# sourceMappingURL=index.011f33b6.css.map */
