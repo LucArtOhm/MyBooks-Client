@@ -1,0 +1,22 @@
+/* Kids learning Tube colors
+blau: #74cada
+dark gray: #4b586a
+green: #c3d07e
+yellow: #f4e199
+pinkish: #de8689
+lightgray: #eeeeee 
+
+For the font: 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+*/
+
+$bg-color: #eeeeee;
+$text-color: pink;
+$border-color: black;
+$primary-font: 'Amatic SC', cursive;
+
+.btns {
+    justify-Content: space-around;
+}

@@ -1,5 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import './book-view.scss';
+
+import { Container, Row, Col, Button, Card, CardGroup } from 'react-bootstrap';
 
 // Show details once BookCard is clicked
 export class BookView extends React.Component {
@@ -8,28 +11,34 @@ export class BookView extends React.Component {
     const { book, onBackClick } = this.props;
 
     return (
-      <div className='book-view'>
-        <div className='book-cover'>
-          <img crossOrigin="anonymous" src={book.CoverURL} />
-        </div>
-        <div className='book-title'>
-          <span className='label'>Title: </span>
-          <span className='value'>{book.Title}</span>
-        </div>
-        <div className='book-description'>
-          <span className='label'>Description: </span>
-          <span className='value'>{book.Description}</span>
-        </div>
-        <div className='book-author'>
-          <span className='label'>Author: </span>
-          <span className='value'>{book.Author.Name}</span>
-        </div>
-        <div className='book-illustrator'>
-          <span className='label'>Illustrator: </span>
-          <span className='value'>{book.Illustrator}</span>
-        </div>
-        <button onClick={() => { onBackClick(null); }}>Back</button>
-      </div>
+      <Container fluid style={{ paddingTop: '.75rem' }}>
+        <Row>
+          <CardGroup>
+            <Card>
+              <Card.Img variant='top' crossOrigin='Anonymous' src={book.CoverURL} />
+              <Card.Body>
+                <Card.Title className='book-title'>
+                  <span className='label'>Title: </span>
+                  <span className='value'>{book.Title}</span>
+                </Card.Title>
+                <Card.Text className='book-description'>
+                  <span className='label'>Description: </span>
+                  <span className='value'>{book.Description}</span>
+                </Card.Text>
+                <Card.Text className='book-author'>
+                  <span className='label'>Author: </span>
+                  <span className='value'>{book.Author.Name}</span>
+                </Card.Text>
+                <Card.Text className='book-illustrator'>
+                  <span className='label'>Illustrator: </span>
+                  <span className='value'>{book.Illustrator}</span>
+                </Card.Text>
+                <Button onClick={() => { onBackClick(null); }}>Back</Button>
+              </Card.Body>
+            </Card>
+          </CardGroup>
+        </Row>
+      </Container >
     )
   }
 }
