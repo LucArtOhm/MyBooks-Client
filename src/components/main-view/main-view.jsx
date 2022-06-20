@@ -81,7 +81,7 @@ export class MainView extends React.Component {
             : (
               <Row className=''>
                 {books.map(book => (
-                  <Col sm={6} md={4}>
+                  <Col sm={6} md={4} lg={3}>
                     <BookCard key={book._id} book={book} onBookClick={(newSelectedBook) => { this.setSelectedBook(newSelectedBook) }} />
                   </Col>
                 ))
