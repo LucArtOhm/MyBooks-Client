@@ -23,15 +23,13 @@ export class MainView extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('https://your-favorite-books.herokuapp.com/books')
-      .then(response => {
-        this.setState({
-          books: response.data
-        });
-      })
-      .catch(error => {
-        console.log(error);
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
       });
+      this.getBooks(accessToken);
+    }
   }
 
   // When a book is clicked, this function is invoked and updates the state of the `selectedBook` property to that book
@@ -41,10 +39,38 @@ export class MainView extends React.Component {
     });
   }
 
-  onLoggedIn(user) {
+  onLoggedIn(authData) {
+    console.log(authData);
     this.setState({
-      user
+      user: authData.user.Username
     });
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getBooks(authData.token);
+  }
+
+  onLoggedOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user: null
+    });
+  }
+
+  getBooks(token) {
+    axios.get('https://your-favorite-books.herokuapp.com/books', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        //Assign the result to the state
+        this.setState({
+          books: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   onRegistration(registered) {
@@ -55,6 +81,8 @@ export class MainView extends React.Component {
 
   render() {
     const { books, selectedBook, user, registered } = this.state;
+
+    <button onClick={() => { this.onLoggedOut() }}>Logout</button>
 
     // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView
 
