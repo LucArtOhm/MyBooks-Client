@@ -1,4 +1,5 @@
 
+
 /* Kids learning Tube colors
 blau: #74cada
 dark gray: #4b586a
@@ -24,8 +25,30 @@ For the font:
 
 
 
+.fav-book {
+  margin-bottom: 15px;
+}
+.fav-book figure {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: auto;
+  width: 100%;
+}
+.fav-book figure img {
+  display: block;
+  height: 400px;
+  margin: auto;
+}
+.fav-book button.btn {
+  display: block;
+  margin: auto;
+}
 
-
+.card {
+  margin-bottom: 15px;
+}
 
 /* Kids learning Tube colors
 blau: #74cada
@@ -43,4 +66,4 @@ For the font:
 .app-container {
   background-color: #eeeeee;
 }
-/*# sourceMappingURL=index.011f33b6.css.map */
+/*# sourceMappingURL=index.f99bb150.css.map */

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import { Form, Button, Row, Col, Container, Card, CardGroup } from 'react-bootstrap';
+/* import { Link } from "react-router-dom"; */
 
 import './registration-view.scss';
 import axios from 'axios';
@@ -12,29 +13,63 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(username, password, email, birthday);
-    props.onRegistration(username);
-  };
+  // Declare hook for each input
+  const [usernameErr, setUsernameErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+  const [emailErr, setEmailErr] = useState('');
 
-  /* const handleSubmit = (e) => {
+  // Validate user inputs
+  const validate = () => {
+    let isReq = true;
+    if (!username) {
+      setUsernameErr('Username Required');
+      isReq = false;
+    } else if (username.length < 3) {
+      setUsernameErr('Username must be at least 3 characters long');
+      isReq = false;
+    }
+    if (!password) {
+      setPasswordErr('Password Required');
+      isReq = false;
+    } else if (password.length < 6) {
+      setPasswordErr('Password must be at least 6 characters long');
+      isReq = false;
+    }
+    if (!email) {
+      setEmailErr('Email Required');
+      isReq = false;
+    } else if (email.indexOf('@') === -1) {
+      setEmailErr('Email must be a valid email address');
+      isReq = false;
+    }
+
+    return isReq;
+  }
+
+  const handleRegistration = (e) => {
     e.preventDefault();
-    axios.post('https://your-favorite-books.herokuapp.com/users', {
-      Username: username,
-      Password: password,
-      Email: email
-    })
-      .then(response => {
-        const data = reponse.data;
-        console.log(data);
-        window.open('/', '_self');
-      })
-      .catch(e => {
-        console.log('Error registering the user');
-        alert("Something wasn/'t entered right");
-      });
-  }; */
+    const isReq = validate();
+    if (isReq) {
+      axios.post('https://your-favorite-books.herokuapp.com/users',
+        {
+          Username: username,
+          Password: password,
+          Email: email,
+          Birthday: birthday
+        })
+        .then((response) => {
+          const data = response.data;
+          console.log(data);
+          alert("Your registration has been successfully processed. You can now proceed to login.");
+          window.open("/", "_self"); // The '_self' allows the next page to open in the same window
+        })
+        .catch(e => {
+          console.log('No such user');
+          alert("Your registration has NOT been successfully processed. Please try again.");
+          window.open("/register", "_self");
+        });
+    }
+  };
 
   return (
     <Container>
@@ -54,6 +89,7 @@ export function RegistrationView(props) {
                       required
                       placeholder='Enter a Username'
                     />
+                    {usernameErr && <p>{usernameErr}</p>}
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Password:</Form.Label>
@@ -65,6 +101,7 @@ export function RegistrationView(props) {
                       minLength={8}
                       placeholder='Your password must be 8 or more characters'
                     />
+                    {passwordErr && <p>{passwordErr}</p>}
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Email:</Form.Label>
@@ -75,6 +112,7 @@ export function RegistrationView(props) {
                       required
                       placeholder='Enter your email address'
                     />
+                    {emailErr && <p>{emailErr}</p>}
                     <Form.Text className="text-muted">
                       We'll never share your email with anyone else.
                     </Form.Text>
@@ -90,7 +128,7 @@ export function RegistrationView(props) {
                     />
                   </Form.Group>
                 </Form><br></br>
-                <Button type="submit" onClick={handleSubmit}>Submit</Button>
+                <Button type="submit" onClick={handleRegistration}>Submit</Button>
               </Card.Body>
             </Card>
           </CardGroup>
@@ -105,8 +143,7 @@ RegistrationView.propTypes = {
   registered: propTypes.shape({
     Username: propTypes.string.isRequired,
     Password: propTypes.string.isRequired,
-    Email: propTypes.string.isRequired,
-    Birthday: propTypes.number.isRequired,
+    Email: propTypes.string.isRequired
   }),
-  onRegistration: propTypes.func.isRequired,
+  /* onRegistration: propTypes.func.isRequired, */
 };

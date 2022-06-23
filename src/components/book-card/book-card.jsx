@@ -1,13 +1,13 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
-import { Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import './book-card.scss';
 
 export class BookCard extends React.Component {
   render() {
-    const { book, onBookClick } = this.props;
+    const { book } = this.props;
 
     return (
       <Card className='book-card-wrapper, mb3'>
@@ -15,7 +15,9 @@ export class BookCard extends React.Component {
         <Card.Body>
           <Card.Title>{book.Title}</Card.Title>
           <Card.Text>{book.Description}</Card.Text>
-          <Button variant='outline-secondary' onClick={() => onBookClick(book)} >Open</Button>
+          <Link to={`/books/${book._id}`}>
+            <Button variant='outline-secondary'>Open</Button>
+          </Link>
         </Card.Body>
       </Card>
     );
@@ -40,6 +42,5 @@ BookCard.propTypes = {
       OLanguage: propTypes.string.isRequired,
       ReleaseYear: propTypes.number.isRequired
     })
-  }).isRequired,
-  onBookClick: propTypes.func.isRequired
+  }).isRequired
 };

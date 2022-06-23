@@ -1,12 +1,15 @@
 import React from 'react';
 import axios from 'axios';
-
-// Add components
+import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
+import { Container, Row, Col } from 'react-bootstrap';
+import { NavbarView } from '../navbar-view/navbar-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
 import { BookCard } from '../book-card/book-card';
 import { BookView } from '../book-view/book-view';
-import { Container, Row, Col } from 'react-bootstrap';
+import { AuthorView } from '../author-view/author-view';
+import { PublisherView } from '../publisher-view/publisher-view';
+import { ProfileView } from '../profile-view/profile-view';
 
 import './main-view.scss'
 
@@ -16,9 +19,7 @@ export class MainView extends React.Component {
     // Initial state is set to null
     this.state = {
       books: [],
-      selectedBook: null,
       user: null,
-      registered: null // This will help to toggle the registration view
     };
   }
 
@@ -32,13 +33,6 @@ export class MainView extends React.Component {
     }
   }
 
-  // When a book is clicked, this function is invoked and updates the state of the `selectedBook` property to that book
-  setSelectedBook(book) {
-    this.setState({
-      selectedBook: book
-    });
-  }
-
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
@@ -50,20 +44,12 @@ export class MainView extends React.Component {
     this.getBooks(authData.token);
   }
 
-  onLoggedOut() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    this.setState({
-      user: null
-    });
-  }
-
   getBooks(token) {
     axios.get('https://your-favorite-books.herokuapp.com/books', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        //Assign the result to the state
+        // Assign the result to the state
         this.setState({
           books: response.data
         });
@@ -73,52 +59,77 @@ export class MainView extends React.Component {
       });
   }
 
-  onRegistration(registered) {
-    this.setState({
-      registered
-    })
-  }
-
   render() {
-    const { books, selectedBook, user, registered } = this.state;
-
-    <button onClick={() => { this.onLoggedOut() }}>Logout</button>
-
-    // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView
-
-    if (!user) {
-      return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
-    }
-
-    if (!registered) return <RegistrationView onRegistration={(registered) => this.onRegistration(registered)} />;
-
-    // Before the books have been loaded
-    if (books.length === 0) return <div className='main-view' />;
-
+    const { books, user } = this.state;
     return (
-      <Container>
-        <div className='main-view'>
-          {selectedBook
-            ? (
-              <Row className='main-view justify-content-md-center'>
-                <Col>
-                  <BookView book={selectedBook} onBackClick={newSelectedBook => { this.setSelectedBook(newSelectedBook); }} />
+      <Router>
+        <NavbarView user={user} />
+        <Container>
+          <Row className='main-view justify-content-md-center'>
+            <h1>You're now logged in!</h1>
+            <Route exact path='/' render={() => {
+              // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView
+              if (!user) return
+              <Col>
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+              </Col>
+              // Before the books have been loaded
+              if (books.length === 0) return <div className='main-view' />
+              return books.map(m => (
+                <Col md={3} key={m._id}>
+                  <BookCard book={m} />
                 </Col>
-              </Row>
-            )
-            : (
-              <Row className=''>
-                {books.map(book => (
-                  <Col sm={6} md={4} lg={3}>
-                    <BookCard key={book._id} book={book} onBookClick={(newSelectedBook) => { this.setSelectedBook(newSelectedBook) }} />
-                  </Col>
-                ))
-                }
-              </Row>
-            )
-          }
-        </div>
-      </Container>
+              ))
+            }} />
+
+            <Route path='/register' render={() => {
+              if (user) return <Redirect to='/' />
+              return <Col lg={8} md={8}>
+                <RegistrationView />
+              </Col>
+            }} />
+
+            <Route path='/books/:booksId' render={({ match, history }) => {
+              if (!user) return <Col sm={6} md={4} lg={3}>
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+              </Col>
+              if (books.length === 0) return <div className='main-view' />;
+              return <Col md={8}>
+                <BookView book={books.find(m => m._id === match.params.bookId)} onBackClick={() => history.goBack()} />
+              </Col>
+            }} />
+
+            <Route path='/authors/:name' render={({ match, history }) => {
+              if (!user) return <Col>
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+              </Col>
+              if (books.length === 0) return <div className='main-view' />;
+              return <Col sm={6} md={4} lg={3}>
+                <AuthorView author={books.find(m => m.Author.Name === match.params.name).Author} onBackClick={() => history.goBack()} />
+              </Col>
+            }} />
+
+            <Route path='/publishers/:name' render={({ match, history }) => {
+              if (!user) return <Col><div className='main-view' />;
+                return <Col sm={6} md={4} lg={3}>
+                  <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+                </Col>
+                if (books.length === 0) return <div className='main-view' />;
+                <PublisherView publisher={books.find(m => m.Publisher.Name === match.params.name).Publisher} onBackClick={() => history.goBack()} />
+              </Col>
+            }} />
+
+            <Link to={`/users/${user}`} >{user}</Link>
+            <Route path={`/users/${user}`} render={({ history }) => {
+              if (!user) return <Redirect to='/' />
+              return <Col>
+                <ProfileView user={user} onBackClick={() => history.goBack()} />
+              </Col>
+            }} />
+
+          </Row>
+        </Container>
+      </Router>
     );
   }
 }

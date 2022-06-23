@@ -1,8 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import './book-view.scss';
-
+import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button, Card, CardGroup } from 'react-bootstrap';
+
+import './book-view.scss';
 
 // Show details once BookCard is clicked
 export class BookView extends React.Component {
@@ -28,12 +29,18 @@ export class BookView extends React.Component {
                 <Card.Text className='book-author'>
                   <span className='label'>Author: </span>
                   <span className='value'>{book.Author.Name}</span>
+                  <Link to={`/authors/${book.Author.Name}`}>
+                    <Button variant='link'>Author</Button>
+                  </Link>
                 </Card.Text>
-                <Card.Text className='book-illustrator'>
-                  <span className='label'>Illustrator: </span>
-                  <span className='value'>{book.Illustrator}</span>
+                <Card.Text className='book-publisher'>
+                  <span className='label'>Publisher: </span>
+                  <span className='value'>{book.Publisher.Name}</span>
+                  <Link to={`/publishers/${book.Publisher.Name}`}>
+                    <Button variant='link'>Publisher</Button>
+                  </Link>
                 </Card.Text>
-                <Button onClick={() => { onBackClick(null); }}>Back</Button>
+                <Button onClick={() => { onBackClick(); }}>Back</Button>
               </Card.Body>
             </Card>
           </CardGroup>
