@@ -1,57 +1,64 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Row, Col, Button, Figure, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
+import { Button, Card, Col } from 'react-bootstrap';
 
 import './profile-view.scss';
 
-function FavoriteBooksView({ favoriteBooksList }) {
-  const removeFav = (id) => {
-    let token = localStorage.getItem('token');
-    let url = `https://your-favorite-books.herokuapp.com/users/${localStorage.getItem('user')}/books/${id}`;
-    axios.delete(url, {
-      headers: { Authorization: `Bearer ${token}` },
+export function FavoriteBooksView(props) {
+  const { books, favoriteBooks, currentUser, token } = props;
+
+  const favoriteBooksId = favoriteBooks.map(m => m._id)
+
+  const favoriteBooksList = books.filter(m => {
+    return favoriteBooksId.includes(m._id)
+  })
+
+  const handleBookDelete = (bookId) => {
+    axios.delete(`https://your-favorite-books.herokuapp.com/users/${currentUser}/books/${bookId}`, {
+      headers: { Authorization: `Bearer ${token}` }
     })
+      .then(() => {
+        alert(`The book was successfully deleted.`)
+        window.open('/users/:username', '_self');
+      }).
+      catch(error => console.error(error))
   }
 
   return (
-    <Card>
-      <Card.Body>
-        <Row>
-          <Col xs={12}>
-            <h4>Favorite Books</h4>
-          </Col>
-        </Row>
-
-        <Row>
-          {favoriteBooksList.map((CoverURL, Title, _id) => {
-            return (
-              <Col xs={12} md={6} lg={3} key={_id} className='fav-books'>
-                <Figure>
-                  <Link to={`/books/${_id}`}>
-                    <Figure.Imgage
-                      src={CoverURL}
-                      alt={Title}
-                    />
-                    <Figure.Caption>
-                      {Title}
-                    </Figure.Caption>
+    <Fragment>
+      {favoriteBooksList.length === 0 ? (
+        <p>You have no favorite books yet.</p>
+      ) : (
+        favoriteBooksList.map((book) => {
+          return (
+            <Col xs={10} sm={8} md={6} lg={4} >
+              <Card id="book-card">
+                <Link to={`/books/${book._id}`}>
+                  <Card.Img variant="top" src={book.CoverURL} />
+                </Link>
+                <Card.Body>
+                  <Card.Title>{book.Title}</Card.Title>
+                  <Card.Text>{book.Description}</Card.Text>
+                  <Link to={`/books/${book._id}`}>
+                    <Button className="button" variant="outline-primary" size="sm">Open</Button>
                   </Link>
-                </Figure>
+                  <Button
+                    className="button ml-2"
+                    variant="outline-primary"
+                    size="sm" onClick={() => { handleBookDelete(book._id) }} >
+                    Remove
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          )
+        })
+      )
+      }
 
-                <Button
-                  variant='secondary'
-                  onClick={() => removeFav(books._id)}>
-                  Remove
-                </Button>
-              </Col>
-            )
-          })
-          }
-        </Row>
-      </Card.Body>
-    </Card>
+    </Fragment>
   )
 }
-
-export default FavoriteBooksView

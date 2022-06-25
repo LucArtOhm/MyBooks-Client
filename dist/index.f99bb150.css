@@ -13,14 +13,31 @@ For the font:
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
 */
-.btns {
-  justify-Content: space-around;
-}
 .book-card-wrapper {
   color: #4b586a;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   margin-bottom: 20px;
   align-content: space-between;
+  margin-bottom: 15px;
+}
+
+.book-card {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: auto;
+  width: 100%;
+}
+.book-card img {
+  display: block;
+  height: 400px;
+  margin: auto;
+}
+
+button.btn {
+  display: block;
+  margin: auto;
 }
 
 

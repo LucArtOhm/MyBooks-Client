@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, Row, Col, Figure } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import './book-card.scss';
@@ -10,37 +10,33 @@ export class BookCard extends React.Component {
     const { book } = this.props;
 
     return (
-      <Card className='book-card-wrapper, mb3'>
-        <Card.Img alt='Image of the book cover' variant='top' style={{}} crossOrigin='Anonymous' src={book.CoverURL} />
+      <Card style={{ marginTop: 50, marginBottom: 30 }} className='book-card-wrapper, mb3'>
         <Card.Body>
-          <Card.Title>{book.Title}</Card.Title>
-          <Card.Text>{book.Description}</Card.Text>
-          <Link to={`/books/${book._id}`}>
-            <Button variant='outline-secondary'>Open</Button>
-          </Link>
+          <Row>
+            <Col className='book-card mt-3'>
+              <Figure>
+                <Figure.Image
+                  alt='Image of the book cover'
+                  variant='top'
+                  crossOrigin='Anonymous'
+                  src={book.CoverURL} />
+
+                {<Figure.Caption className='mt-3' >Genre:<br></br> {book.Genre}</Figure.Caption>}
+                <Link to={`/books/${book._id}`}>
+                  <Button className='mt-3' variant='secondary'>Open</Button>
+                </Link>
+              </Figure>
+            </Col>
+          </Row>
         </Card.Body>
-      </Card>
+      </Card >
     );
   }
 }
 
 BookCard.propTypes = {
   book: propTypes.shape({
-    Title: propTypes.string.isRequired,
-    ReadingAge: propTypes.string.isRequired,
-    Description: propTypes.string.isRequired,
     Genre: propTypes.string.isRequired,
-    Illustrator: propTypes.string.isRequired,
-    CoverURL: propTypes.string.isRequired,
-    DigitalVersion: propTypes.bool.isRequired,
-    Author: propTypes.shape({
-      Name: propTypes.string.isRequired,
-      Origin: propTypes.string.isRequired
-    }),
-    Publisher: propTypes.shape({
-      Name: propTypes.string.isRequired,
-      OLanguage: propTypes.string.isRequired,
-      ReleaseYear: propTypes.number.isRequired
-    })
+    CoverURL: propTypes.string.isRequired
   }).isRequired
 };

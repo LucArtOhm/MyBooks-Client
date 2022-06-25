@@ -7,6 +7,17 @@ import './book-view.scss';
 
 // Show details once BookCard is clicked
 export class BookView extends React.Component {
+  /* keypressCallback(event) {
+    console.log(event.key);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keypress', this.keypressCallback);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keypress', this.keypressCallback);
+  } */
 
   render() {
     const { book, onBackClick } = this.props;
@@ -40,7 +51,7 @@ export class BookView extends React.Component {
                     <Button variant='link'>Publisher</Button>
                   </Link>
                 </Card.Text>
-                <Button onClick={() => { onBackClick(); }}>Back</Button>
+                <Button onClick={() => { onBackClick(null); }}>Back</Button>
               </Card.Body>
             </Card>
           </CardGroup>
@@ -53,11 +64,20 @@ export class BookView extends React.Component {
 BookView.propTypes = {
   book: propTypes.shape({
     Title: propTypes.string.isRequired,
+    ReadingAge: propTypes.string.isRequired,
     Description: propTypes.string.isRequired,
+    Genre: propTypes.string.isRequired,
+    Illustrator: propTypes.string.isRequired,
+    CoverURL: propTypes.string.isRequired,
+    DigitalVersion: propTypes.bool.isRequired,
     Author: propTypes.shape({
-      Name: propTypes.string.isRequired
+      Name: propTypes.string.isRequired,
+      Origin: propTypes.string.isRequired
     }),
-    Illustrator: propTypes.string.isRequired
-  }).isRequired,
-  onBackClick: propTypes.func.isRequired
+    Publisher: propTypes.shape({
+      Name: propTypes.string.isRequired,
+      OLanguage: propTypes.string.isRequired,
+      ReleaseYear: propTypes.number.isRequired
+    })
+  }).isRequired
 };

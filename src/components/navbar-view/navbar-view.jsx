@@ -1,6 +1,7 @@
 import React from "react";
-import './navbar-view.scss';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import './navbar-view.scss';
 
 export function NavbarView({ user }) {
 
@@ -23,25 +24,33 @@ export function NavbarView({ user }) {
   return (
     <Navbar className='main-nav' sticky='top' bg='dark' expand='lg' variant='dark'>
       <Container className='navbar-container'>
-        <Navbar.Brand className='navbar-logo' href='/'>MyQueerLibrary</Navbar.Brand>
+        <Navbar.Brand as={Link} to={'/'}>MY QUEER LIBRARY</Navbar.Brand>
+        {/*  <Navbar.Brand className='navbar-logo' href='/'>MY QUEER LIBRARY</Navbar.Brand> */}
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
-          <Nav className='ml-auto'>
+          <Nav className='me-auto'>
             {isAuth() && (
-              <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>
+              <Nav.Link as={Link} to={`/`}>Books</Nav.Link>
             )}
+
             {isAuth() && (
-              <Button variant='link' onClick={() => { this.onLoggedOut() }}>Logout</Button>
+              <Nav.Link as={Link} to={`/users/${user}`}>Profile</Nav.Link>
             )}
-            {!isAuth() && (
-              <Nav.Link href='/login'>Login</Nav.Link>
+
+            {isAuth() && (
+              <Nav.Link onClick={() => onLoggedOut()}>Logout</Nav.Link>
             )}
+
             {!isAuth() && (
-              <Nav.Link href='/register'>Register</Nav.Link>
+              <Nav.Link as={Link} to={`/`}>Login</Nav.Link>
+            )}
+
+            {!isAuth() && (
+              <Nav.Link as={Link} to={`/register`}>Sign Up</Nav.Link>
             )}
           </Nav>
         </Navbar.Collapse>
       </Container>
-    </Navbar>
+    </Navbar >
   );
 }

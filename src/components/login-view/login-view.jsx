@@ -28,7 +28,7 @@ export function LoginView(props) {
       setPasswordErr('Password Required');
       isReq = false;
     } else if (password.length < 6) {
-      setPassword('Password must be at least 6 characters long');
+      setPasswordErr('Password must be at least 6 characters long');
       isReq = false;
     }
 
@@ -55,28 +55,28 @@ export function LoginView(props) {
   };
 
   return (
-    <Container className='body'>
+    <Container>
       <Row className='justify-content-md-center'>
-        <Col md={8} className=''>
+        <Col md={6}>
           <Card style={{ marginTop: 100, marginBottom: 50, width: '30' }}>
             <Card.Body>
-              <Card.Title style={{ textAlign: 'center', fontSize: '2r' }}>Please Login</Card.Title>
+              <Card.Title style={{ textAlign: 'center', fontSize: '' }}>Please Login</Card.Title>
               <Form className='login-border'>
-                <Form.Group controlId='formUsername'>
+                <Form.Group className='mt-4' controlId='formUsername'>
                   <Form.Label>Username:</Form.Label>
-                  <Form.Control type='text' placeholder='Enter Username' value={username} onChange={e => setUsername(e.target.value)} />
+                  <Form.Control style={{ fontSize: '16px' }} type='text' placeholder='Enter Username' value={username} onChange={e => setUsername(e.target.value)} />
                   {usernameErr && <p>{usernameErr}</p>}
                 </Form.Group>
 
-                <Form.Group controlId='formPassword'>
+                <Form.Group className='mt-3' controlId='formPassword'>
                   <Form.Label>Password:</Form.Label>
-                  <Form.Control type='password' placeholder='Enter Password' value={password} onChange={e => setPassword(e.target.value)} />
+                  <Form.Control style={{ fontSize: '16px' }} type='password' placeholder='Enter Password' value={password} onChange={e => setPassword(e.target.value)} />
                   {passwordErr && <p>{passwordErr}</p>}
                 </Form.Group>
               </Form><br></br>
-              <Row className='btns'>
-                <Button variant='primary' type='submit' onClick={handleSubmit}>Submit</Button>
-                <Button variant='outline-primary' type='submit' onClick={handleSubmit}>Sign up!</Button>
+              <Row className='btns mt-2'>
+                <Button variant='secondary' type='submit' onClick={handleSubmit}>Submit</Button>
+
               </Row>
             </Card.Body>
           </Card>

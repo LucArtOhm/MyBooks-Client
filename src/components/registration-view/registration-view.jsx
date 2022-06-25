@@ -39,10 +39,9 @@ export function RegistrationView(props) {
       setEmailErr('Email Required');
       isReq = false;
     } else if (email.indexOf('@') === -1) {
-      setEmailErr('Email must be a valid email address');
+      setEmailErr('Please enter a valid email address');
       isReq = false;
     }
-
     return isReq;
   }
 
@@ -73,16 +72,17 @@ export function RegistrationView(props) {
 
   return (
     <Container>
-      <Row>
-        <Col>
+      <Row className='justify-content-md-center'>
+        <Col md={8}>
           <CardGroup>
-            <Card>
+            <Card style={{ marginTop: 100, marginBottom: 50, width: '30' }}>
               <Card.Body>
                 <Card.Title>Please Register!</Card.Title>
                 <Form>
                   <Form.Group>
                     <Form.Label>Username:</Form.Label>
                     <Form.Control
+                      style={{ fontSize: '16px' }}
                       type='text'
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
@@ -91,21 +91,23 @@ export function RegistrationView(props) {
                     />
                     {usernameErr && <p>{usernameErr}</p>}
                   </Form.Group>
-                  <Form.Group>
+                  <Form.Group className='mt-3'>
                     <Form.Label>Password:</Form.Label>
                     <Form.Control
-                      type='text'
-                      value={password}
+                      style={{ fontSize: '16px' }}
+                      type='password'
+                      value={'******'}
                       onChange={(e) => setPassword(e.target.value)}
                       required
                       minLength={8}
-                      placeholder='Your password must be 8 or more characters'
+                      placeholder='Password must be 8 or more characters'
                     />
                     {passwordErr && <p>{passwordErr}</p>}
                   </Form.Group>
-                  <Form.Group>
+                  <Form.Group className='mt-3'>
                     <Form.Label>Email:</Form.Label>
                     <Form.Control
+                      style={{ fontSize: '16px' }}
                       type='text'
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -117,18 +119,19 @@ export function RegistrationView(props) {
                       We'll never share your email with anyone else.
                     </Form.Text>
                   </Form.Group>
-                  <Form.Group>
+                  <Form.Group className='mt-3'>
                     <Form.Label>Birthday:</Form.Label>
                     <Form.Control
+                      style={{ fontSize: '16px' }}
                       type='text'
                       value={birthday}
                       onChange={(e) => setBirthday(e.target.value)}
                       required
-                      placeholder='Enter a Birthday'
+                      placeholder='YYYY-MM-DD'
                     />
                   </Form.Group>
                 </Form><br></br>
-                <Button type="submit" onClick={handleRegistration}>Submit</Button>
+                <Button variant='secondary' type="submit" onClick={handleRegistration}>Submit</Button>
               </Card.Body>
             </Card>
           </CardGroup>

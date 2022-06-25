@@ -66,17 +66,17 @@ export class MainView extends React.Component {
         <NavbarView user={user} />
         <Container>
           <Row className='main-view justify-content-md-center'>
-            <h1>You're now logged in!</h1>
             <Route exact path='/' render={() => {
               // If there is no user, the LoginView is rendered. If there is a user logged in, the user details are passed as a prop to the LoginView
-              if (!user) return
-              <Col>
-                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-              </Col>
+              if (!user) {
+                return <Col>
+                  <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+                </Col>
+              }
               // Before the books have been loaded
               if (books.length === 0) return <div className='main-view' />
               return books.map(m => (
-                <Col md={3} key={m._id}>
+                <Col xs={12} md={6} lg={3} key={m._id}>
                   <BookCard book={m} />
                 </Col>
               ))
