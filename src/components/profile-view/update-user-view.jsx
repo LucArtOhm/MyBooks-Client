@@ -29,8 +29,8 @@ export function UpdateUserView(props) {
     if (!password) {
       setValues({ ...values, passwordErr: 'Password required' });
       isReq = false;
-    } else if (password.length < 6) {
-      setValues({ ...values, passwordErr: 'Password must be at least 6 characters long' });
+    } else if (password.length < 5) {
+      setValues({ ...values, passwordErr: 'Password must be at least 5 characters long' });
       isReq = false;
     }
     if (!email) {
@@ -97,8 +97,8 @@ export function UpdateUserView(props) {
                       value={password}
                       onChange={e => setPassword(e.target.value)}
                       required
-                      minLength='8'
-                      placeholder='Password must be 6 or more characters' />
+                      minLength='5'
+                      placeholder='Password must be 5 or more characters' />
                     {values.passwordErr && <p>{values.passwordErr}</p>}
                   </Form.Group>
 

@@ -5,7 +5,6 @@ import { Col, Container, Row, Button, CardGroup, Card, Form } from 'react-bootst
 
 import { FavoriteBooksView } from './favorite-books-view';
 import { UpdateUserView } from './update-user-view';
-/* import { UserInfoView } from './update-user-view'; */
 import './profile-view.scss';
 
 export function ProfileView(props) {
@@ -14,21 +13,24 @@ export function ProfileView(props) {
   const [favoriteBooks, setFavoriteBooks] = useState([]);
   const currentUser = localStorage.getItem('user');
   const token = localStorage.getItem('token');
+  console.log(books)
+
+  useEffect(() => {
+    getUser();
+  }, [])
 
   const getUser = () => {
     axios.get(`https://your-favorite-books.herokuapp.com/users/${currentUser}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
-      .then(response => {
+      .then((response) => {
         setUser(response.data);
         setFavoriteBooks(response.data.favoriteBooks)
+        setBooks(response.data.books)
+        console.log(response.data)
       })
       .catch(error => console.error(error))
   }
-
-  useEffect(() => {
-    getUser();
-  }, [])
 
   const handleDelete = () => {
     axios.delete(`https://your-favorite-books.herokuapp.com/users/${currentUser}`, {
@@ -45,67 +47,35 @@ export function ProfileView(props) {
   return (
     <Container id="profile-form">
       <Row className='mt-5'>
-        <Col /* sm="10" md="8" lg="6" */>
+        <Col sm="10" md="8" lg="6">
           <CardGroup>
             <Card>
               <Card.Body>
-                <Card.Title>MY PROFILE</Card.Title>
-                <Form>
-                  <Form.Group controlId='formUsername'>
-                    <Form.Label>Username:</Form.Label>
-                    <Form.Control
-                      type='text'
-                      value={user.Username} />
-                  </Form.Group>
-
-                  <Form.Group className='mt-3' controlId='formPassword'>
-                    <Form.Label>Password:</Form.Label>
-                    <Form.Control
-                      type='password'
-                      value={'******'} />
-                  </Form.Group>
-
-                  <Form.Group className='mt-3' controlId='formEmail'>
-                    <Form.Label>E-mail address:</Form.Label>
-                    <Form.Control
-                      type='email'
-                      value={user.Email} />
-                  </Form.Group>
-
-                  <Form.Group className='mt-3' controlId='formBirthday' >
-                    <Form.Label>Birthday:</Form.Label>
-                    <Form.Control
-                      type='text'
-                      value={user.Birthday}
-                      placeholder='YYY-MM-DD' />
-                  </Form.Group>
-                  <Row className='mt-5'><h4>My Favorite Books</h4></Row>
-                  <Form.Group className='mt-3'>
-                    <FavoriteBooksView
-                      books={books}
-                      favoriteBooks={favoriteBooks}
-                      currentUser={currentUser}
-                      token={token} />
-                  </Form.Group>
-
-                </Form>
+                <Card.Title>MY INFO: </Card.Title>
+                <p className='mt-4'>Name: {user.Username}</p>
+                <p>E-mail: {user.Email}</p>
               </Card.Body>
             </Card>
           </CardGroup>
         </Col>
-
         <Col>
           <UpdateUserView user={user} />
         </Col>
-        {/*    <Col>
-          <UserInfoView user={user} />
-        </Col> */}
       </Row>
+      <Row className='mt-5'><h4>My Favorite Books</h4></Row>
+      <Form.Group className='mt-3'>
+        <FavoriteBooksView
+          books={books}
+          favoriteBooks={favoriteBooks}
+          currentUser={currentUser}
+          token={token} />
 
+      </Form.Group>
       <Button
-        style={{ marginTop: 100, marginBottom: 50, }}
+        style={{ marginTop: 100, marginBottom: 50, marginRight: 30 }}
         className='mt-5'
         variant="warning"
+        size='sm'
         onClick={handleDelete}>
         Delete Profile
       </Button>

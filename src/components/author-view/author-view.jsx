@@ -8,26 +8,28 @@ import { Container, Row, Col, Button, Card, CardGroup } from 'react-bootstrap';
 export class AuthorView extends React.Component {
 
   render() {
-    const { Author, onBackClick } = this.props;
+    const { author, onBackClick } = this.props;
 
     return (
       <Container fluid style={{ paddingTop: '.75rem' }}>
         <Row>
-          <CardGroup>
-            <Card>
-              <Card.Body>
-                <Card.Title className='author-name'>
-                  <span className='label'>Name: </span>
-                  <span className='value'>{Author.Name}</span>
-                </Card.Title>
-                <Card.Text className='author-origin'>
-                  <span className='label'>Origin: </span>
-                  <span className='value'>{Author.Origin}</span>
-                </Card.Text>
-                <Button onClick={() => { onBackClick(); }}>Back</Button>
-              </Card.Body>
-            </Card>
-          </CardGroup>
+          <Col>
+            <CardGroup className=''>
+              <Card style={{ marginTop: 100, marginBottom: 50 }}>
+                <Card.Body>
+                  <Card.Title className='author-name'>
+                    <span className='label'>Name: </span>
+                    <span className='value'>{author.Name}</span>
+                  </Card.Title>
+                  <Card.Text className='author-origin'>
+                    <span className='label'>Origin: </span>
+                    <span className='value'>{author.Origin}</span>
+                  </Card.Text>
+                  <Button variant='secondary' onClick={() => { onBackClick(); }}>Back</Button>
+                </Card.Body>
+              </Card>
+            </CardGroup>
+          </Col>
         </Row>
       </Container >
     )
@@ -35,7 +37,7 @@ export class AuthorView extends React.Component {
 }
 
 AuthorView.propTypes = {
-  Author: propTypes.shape({
+  author: propTypes.shape({
     Name: propTypes.string.isRequired,
     Origin: propTypes.string.isRequired
   }).isRequired,

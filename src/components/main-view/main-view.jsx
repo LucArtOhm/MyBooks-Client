@@ -95,7 +95,7 @@ export class MainView extends React.Component {
               </Col>
               if (books.length === 0) return <div className='main-view' />;
               return <Col md={8}>
-                <BookView book={books.find(m => m._id === match.params.bookId)} onBackClick={() => history.goBack()} />
+                <BookView book={books.find(m => m._id === match.params.booksId)} onBackClick={() => history.goBack()} />
               </Col>
             }} />
 
@@ -111,10 +111,10 @@ export class MainView extends React.Component {
 
             <Route path='/publishers/:name' render={({ match, history }) => {
               if (!user) return <Col><div className='main-view' />;
-                return <Col sm={6} md={4} lg={3}>
-                  <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-                </Col>
-                if (books.length === 0) return <div className='main-view' />;
+                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+              </Col>
+              if (books.length === 0) return <div className='main-view' />;
+              return <Col sm={6} md={4} lg={3}>
                 <PublisherView publisher={books.find(m => m.Publisher.Name === match.params.name).Publisher} onBackClick={() => history.goBack()} />
               </Col>
             }} />

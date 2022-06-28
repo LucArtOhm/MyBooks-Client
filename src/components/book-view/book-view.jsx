@@ -7,17 +7,6 @@ import './book-view.scss';
 
 // Show details once BookCard is clicked
 export class BookView extends React.Component {
-  /* keypressCallback(event) {
-    console.log(event.key);
-  }
-
-  componentDidMount() {
-    document.addEventListener('keypress', this.keypressCallback);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keypress', this.keypressCallback);
-  } */
 
   render() {
     const { book, onBackClick } = this.props;
@@ -37,21 +26,29 @@ export class BookView extends React.Component {
                   <span className='label'>Description: </span>
                   <span className='value'>{book.Description}</span>
                 </Card.Text>
+                <Card.Text className='book-illustrator'>
+                  <span className='label'>Illustrator: </span>
+                  <span className='value'>{book.Illustrator}</span>
+                </Card.Text>
+                <Card.Text className='book-reading-age'>
+                  <span className='label'>Reading Ages: </span>
+                  <span className='value'>{book.ReadingAge}</span>
+                </Card.Text>
+                <Card.Text className='book-digital-version'>
+                  <span className='label'>Digital Version: </span>
+                  <span className='value'>{book.DigitalVersion}</span>
+                </Card.Text>
                 <Card.Text className='book-author'>
-                  <span className='label'>Author: </span>
-                  <span className='value'>{book.Author.Name}</span>
                   <Link to={`/authors/${book.Author.Name}`}>
-                    <Button variant='link'>Author</Button>
+                    <Button variant='light' size='sm'>Author</Button>
                   </Link>
                 </Card.Text>
                 <Card.Text className='book-publisher'>
-                  <span className='label'>Publisher: </span>
-                  <span className='value'>{book.Publisher.Name}</span>
                   <Link to={`/publishers/${book.Publisher.Name}`}>
-                    <Button variant='link'>Publisher</Button>
+                    <Button variant='light' size='sm'>Publisher</Button>
                   </Link>
                 </Card.Text>
-                <Button onClick={() => { onBackClick(null); }}>Back</Button>
+                <Button variant='secondary' onClick={() => { onBackClick(null); }}>Back</Button>
               </Card.Body>
             </Card>
           </CardGroup>

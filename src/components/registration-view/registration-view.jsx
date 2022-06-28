@@ -31,8 +31,8 @@ export function RegistrationView(props) {
     if (!password) {
       setPasswordErr('Password Required');
       isReq = false;
-    } else if (password.length < 6) {
-      setPasswordErr('Password must be at least 6 characters long');
+    } else if (password.length < 5) {
+      setPasswordErr('Password must be at least 5 characters long');
       isReq = false;
     }
     if (!email) {
@@ -92,15 +92,15 @@ export function RegistrationView(props) {
                     {usernameErr && <p>{usernameErr}</p>}
                   </Form.Group>
                   <Form.Group className='mt-3'>
-                    <Form.Label>Password:</Form.Label>
+                    <Form.Label>Password</Form.Label>
                     <Form.Control
                       style={{ fontSize: '16px' }}
                       type='password'
-                      value={'******'}
+                      value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      minLength={8}
-                      placeholder='Password must be 8 or more characters'
+                      minLength={5}
+                      placeholder='Password must be 5 or more characters'
                     />
                     {passwordErr && <p>{passwordErr}</p>}
                   </Form.Group>

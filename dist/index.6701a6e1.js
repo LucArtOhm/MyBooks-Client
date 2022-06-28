@@ -25416,7 +25416,7 @@ class MainView extends _reactDefault.default.Component {
                                     return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                                         md: 8,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_bookView.BookView, {
-                                            book: books.find((m)=>m._id === match.params.bookId
+                                            book: books.find((m)=>m._id === match.params.booksId
                                             ),
                                             onBackClick: ()=>history.goBack()
                                         })
@@ -25467,29 +25467,25 @@ class MainView extends _reactDefault.default.Component {
                                             /*#__PURE__*/ _jsxRuntime.jsx("div", {
                                                 className: "main-view"
                                             }),
-                                            "; return ",
-                                            /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Col, {
-                                                sm: 6,
-                                                md: 4,
-                                                lg: 3,
-                                                children: [
-                                                    /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
-                                                        onLoggedIn: (user1)=>this.onLoggedIn(user1)
-                                                    }),
-                                                    ";"
-                                                ]
-                                            }),
-                                            "if (books.length === 0) return ",
-                                            /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                                                className: "main-view"
-                                            }),
                                             ";",
-                                            /*#__PURE__*/ _jsxRuntime.jsx(_publisherView.PublisherView, {
-                                                publisher: books.find((m)=>m.Publisher.Name === match.params.name
-                                                ).Publisher,
-                                                onBackClick: ()=>history.goBack()
-                                            })
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
+                                                onLoggedIn: (user1)=>this.onLoggedIn(user1)
+                                            }),
+                                            ";"
                                         ]
+                                    }));
+                                    if (books.length === 0) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                        className: "main-view"
+                                    }));
+                                    return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                                        sm: 6,
+                                        md: 4,
+                                        lg: 3,
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_publisherView.PublisherView, {
+                                            publisher: books.find((m)=>m.Publisher.Name === match.params.name
+                                            ).Publisher,
+                                            onBackClick: ()=>history.goBack()
+                                        })
                                     }));
                                 },
                                 __source: {
@@ -44167,8 +44163,8 @@ function RegistrationView(props) {
         if (!password) {
             setPasswordErr('Password Required');
             isReq = false;
-        } else if (password.length < 6) {
-            setPasswordErr('Password must be at least 6 characters long');
+        } else if (password.length < 5) {
+            setPasswordErr('Password must be at least 5 characters long');
             isReq = false;
         }
         if (!email) {
@@ -44313,19 +44309,19 @@ function RegistrationView(props) {
                                                         lineNumber: 95
                                                     },
                                                     __self: this,
-                                                    children: "Password:"
+                                                    children: "Password"
                                                 }),
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                                     style: {
                                                         fontSize: '16px'
                                                     },
                                                     type: "password",
-                                                    value: '******',
+                                                    value: password,
                                                     onChange: (e)=>setPassword(e.target.value)
                                                     ,
                                                     required: true,
-                                                    minLength: 8,
-                                                    placeholder: "Password must be 8 or more characters",
+                                                    minLength: 5,
+                                                    placeholder: "Password must be 5 or more characters",
                                                     __source: {
                                                         fileName: "src/components/registration-view/registration-view.jsx",
                                                         lineNumber: 96
@@ -44515,8 +44511,8 @@ function LoginView(props) {
         if (!password) {
             setPasswordErr('Password Required');
             isReq = false;
-        } else if (password.length < 6) {
-            setPasswordErr('Password must be at least 6 characters long');
+        } else if (password.length < 5) {
+            setPasswordErr('Password must be at least 5 characters long');
             isReq = false;
         }
         return isReq;
@@ -44877,17 +44873,7 @@ var _reactRouterDom = require("react-router-dom");
 var _reactBootstrap = require("react-bootstrap");
 var _bookViewScss = require("./book-view.scss");
 class BookView extends _reactDefault.default.Component {
-    /* keypressCallback(event) {
-    console.log(event.key);
-  }
-
-  componentDidMount() {
-    document.addEventListener('keypress', this.keypressCallback);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keypress', this.keypressCallback);
-  } */ render() {
+    render() {
         const { book , onBackClick  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Container, {
             fluid: true,
@@ -44896,25 +44882,25 @@ class BookView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "src/components/book-view/book-view.jsx",
-                lineNumber: 26
+                lineNumber: 15
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                 __source: {
                     fileName: "src/components/book-view/book-view.jsx",
-                    lineNumber: 27
+                    lineNumber: 16
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.CardGroup, {
                     __source: {
                         fileName: "src/components/book-view/book-view.jsx",
-                        lineNumber: 28
+                        lineNumber: 17
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card, {
                         __source: {
                             fileName: "src/components/book-view/book-view.jsx",
-                            lineNumber: 29
+                            lineNumber: 18
                         },
                         __self: this,
                         children: [
@@ -44924,14 +44910,14 @@ class BookView extends _reactDefault.default.Component {
                                 src: book.CoverURL,
                                 __source: {
                                     fileName: "src/components/book-view/book-view.jsx",
-                                    lineNumber: 30
+                                    lineNumber: 19
                                 },
                                 __self: this
                             }),
                             /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                                 __source: {
                                     fileName: "src/components/book-view/book-view.jsx",
-                                    lineNumber: 31
+                                    lineNumber: 20
                                 },
                                 __self: this,
                                 children: [
@@ -44939,7 +44925,7 @@ class BookView extends _reactDefault.default.Component {
                                         className: "book-title",
                                         __source: {
                                             fileName: "src/components/book-view/book-view.jsx",
-                                            lineNumber: 32
+                                            lineNumber: 21
                                         },
                                         __self: this,
                                         children: [
@@ -44947,7 +44933,7 @@ class BookView extends _reactDefault.default.Component {
                                                 className: "label",
                                                 __source: {
                                                     fileName: "src/components/book-view/book-view.jsx",
-                                                    lineNumber: 33
+                                                    lineNumber: 22
                                                 },
                                                 __self: this,
                                                 children: "Title: "
@@ -44956,7 +44942,7 @@ class BookView extends _reactDefault.default.Component {
                                                 className: "value",
                                                 __source: {
                                                     fileName: "src/components/book-view/book-view.jsx",
-                                                    lineNumber: 34
+                                                    lineNumber: 23
                                                 },
                                                 __self: this,
                                                 children: book.Title
@@ -44967,7 +44953,7 @@ class BookView extends _reactDefault.default.Component {
                                         className: "book-description",
                                         __source: {
                                             fileName: "src/components/book-view/book-view.jsx",
-                                            lineNumber: 36
+                                            lineNumber: 25
                                         },
                                         __self: this,
                                         children: [
@@ -44975,7 +44961,7 @@ class BookView extends _reactDefault.default.Component {
                                                 className: "label",
                                                 __source: {
                                                     fileName: "src/components/book-view/book-view.jsx",
-                                                    lineNumber: 37
+                                                    lineNumber: 26
                                                 },
                                                 __self: this,
                                                 children: "Description: "
@@ -44984,7 +44970,7 @@ class BookView extends _reactDefault.default.Component {
                                                 className: "value",
                                                 __source: {
                                                     fileName: "src/components/book-view/book-view.jsx",
-                                                    lineNumber: 38
+                                                    lineNumber: 27
                                                 },
                                                 __self: this,
                                                 children: book.Description
@@ -44992,10 +44978,10 @@ class BookView extends _reactDefault.default.Component {
                                         ]
                                     }),
                                     /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Text, {
-                                        className: "book-author",
+                                        className: "book-illustrator",
                                         __source: {
                                             fileName: "src/components/book-view/book-view.jsx",
-                                            lineNumber: 40
+                                            lineNumber: 29
                                         },
                                         __self: this,
                                         children: [
@@ -45003,91 +44989,138 @@ class BookView extends _reactDefault.default.Component {
                                                 className: "label",
                                                 __source: {
                                                     fileName: "src/components/book-view/book-view.jsx",
-                                                    lineNumber: 41
+                                                    lineNumber: 30
                                                 },
                                                 __self: this,
-                                                children: "Author: "
+                                                children: "Illustrator: "
                                             }),
                                             /*#__PURE__*/ _jsxRuntime.jsx("span", {
                                                 className: "value",
                                                 __source: {
                                                     fileName: "src/components/book-view/book-view.jsx",
-                                                    lineNumber: 42
+                                                    lineNumber: 31
                                                 },
                                                 __self: this,
-                                                children: book.Author.Name
+                                                children: book.Illustrator
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Text, {
+                                        className: "book-reading-age",
+                                        __source: {
+                                            fileName: "src/components/book-view/book-view.jsx",
+                                            lineNumber: 33
+                                        },
+                                        __self: this,
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                                className: "label",
+                                                __source: {
+                                                    fileName: "src/components/book-view/book-view.jsx",
+                                                    lineNumber: 34
+                                                },
+                                                __self: this,
+                                                children: "Reading Ages: "
                                             }),
-                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                                to: `/authors/${book.Author.Name}`,
+                                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                                className: "value",
+                                                __source: {
+                                                    fileName: "src/components/book-view/book-view.jsx",
+                                                    lineNumber: 35
+                                                },
+                                                __self: this,
+                                                children: book.ReadingAge
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Text, {
+                                        className: "book-digital-version",
+                                        __source: {
+                                            fileName: "src/components/book-view/book-view.jsx",
+                                            lineNumber: 37
+                                        },
+                                        __self: this,
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                                className: "label",
+                                                __source: {
+                                                    fileName: "src/components/book-view/book-view.jsx",
+                                                    lineNumber: 38
+                                                },
+                                                __self: this,
+                                                children: "Digital Version: "
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                                className: "value",
+                                                __source: {
+                                                    fileName: "src/components/book-view/book-view.jsx",
+                                                    lineNumber: 39
+                                                },
+                                                __self: this,
+                                                children: book.DigitalVersion
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Text, {
+                                        className: "book-author",
+                                        __source: {
+                                            fileName: "src/components/book-view/book-view.jsx",
+                                            lineNumber: 41
+                                        },
+                                        __self: this,
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                            to: `/authors/${book.Author.Name}`,
+                                            __source: {
+                                                fileName: "src/components/book-view/book-view.jsx",
+                                                lineNumber: 42
+                                            },
+                                            __self: this,
+                                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                                variant: "light",
+                                                size: "sm",
                                                 __source: {
                                                     fileName: "src/components/book-view/book-view.jsx",
                                                     lineNumber: 43
                                                 },
                                                 __self: this,
-                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
-                                                    variant: "link",
-                                                    __source: {
-                                                        fileName: "src/components/book-view/book-view.jsx",
-                                                        lineNumber: 44
-                                                    },
-                                                    __self: this,
-                                                    children: "Author"
-                                                })
+                                                children: "Author"
                                             })
-                                        ]
+                                        })
                                     }),
-                                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Text, {
+                                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Text, {
                                         className: "book-publisher",
                                         __source: {
                                             fileName: "src/components/book-view/book-view.jsx",
-                                            lineNumber: 47
+                                            lineNumber: 46
                                         },
                                         __self: this,
-                                        children: [
-                                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                                className: "label",
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                            to: `/publishers/${book.Publisher.Name}`,
+                                            __source: {
+                                                fileName: "src/components/book-view/book-view.jsx",
+                                                lineNumber: 47
+                                            },
+                                            __self: this,
+                                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                                variant: "light",
+                                                size: "sm",
                                                 __source: {
                                                     fileName: "src/components/book-view/book-view.jsx",
                                                     lineNumber: 48
                                                 },
                                                 __self: this,
-                                                children: "Publisher: "
-                                            }),
-                                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                                className: "value",
-                                                __source: {
-                                                    fileName: "src/components/book-view/book-view.jsx",
-                                                    lineNumber: 49
-                                                },
-                                                __self: this,
-                                                children: book.Publisher.Name
-                                            }),
-                                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                                to: `/publishers/${book.Publisher.Name}`,
-                                                __source: {
-                                                    fileName: "src/components/book-view/book-view.jsx",
-                                                    lineNumber: 50
-                                                },
-                                                __self: this,
-                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
-                                                    variant: "link",
-                                                    __source: {
-                                                        fileName: "src/components/book-view/book-view.jsx",
-                                                        lineNumber: 51
-                                                    },
-                                                    __self: this,
-                                                    children: "Publisher"
-                                                })
+                                                children: "Publisher"
                                             })
-                                        ]
+                                        })
                                     }),
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                        variant: "secondary",
                                         onClick: ()=>{
                                             onBackClick(null);
                                         },
                                         __source: {
                                             fileName: "src/components/book-view/book-view.jsx",
-                                            lineNumber: 54
+                                            lineNumber: 51
                                         },
                                         __self: this,
                                         children: "Back"
@@ -45148,7 +45181,7 @@ var _authorViewScss = require("./author-view.scss");
 var _reactBootstrap = require("react-bootstrap");
 class AuthorView extends _reactDefault.default.Component {
     render() {
-        const { Author , onBackClick  } = this.props;
+        const { author , onBackClick  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Container, {
             fluid: true,
             style: {
@@ -45165,93 +45198,106 @@ class AuthorView extends _reactDefault.default.Component {
                     lineNumber: 15
                 },
                 __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.CardGroup, {
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                     __source: {
                         fileName: "src/components/author-view/author-view.jsx",
                         lineNumber: 16
                     },
                     __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.CardGroup, {
+                        className: "",
                         __source: {
                             fileName: "src/components/author-view/author-view.jsx",
                             lineNumber: 17
                         },
                         __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
+                            style: {
+                                marginTop: 100,
+                                marginBottom: 50
+                            },
                             __source: {
                                 fileName: "src/components/author-view/author-view.jsx",
                                 lineNumber: 18
                             },
                             __self: this,
-                            children: [
-                                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Title, {
-                                    className: "author-name",
-                                    __source: {
-                                        fileName: "src/components/author-view/author-view.jsx",
-                                        lineNumber: 19
-                                    },
-                                    __self: this,
-                                    children: [
-                                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                            className: "label",
-                                            __source: {
-                                                fileName: "src/components/author-view/author-view.jsx",
-                                                lineNumber: 20
-                                            },
-                                            __self: this,
-                                            children: "Name: "
-                                        }),
-                                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                            className: "value",
-                                            __source: {
-                                                fileName: "src/components/author-view/author-view.jsx",
-                                                lineNumber: 21
-                                            },
-                                            __self: this,
-                                            children: Author.Name
-                                        })
-                                    ]
-                                }),
-                                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Text, {
-                                    className: "author-origin",
-                                    __source: {
-                                        fileName: "src/components/author-view/author-view.jsx",
-                                        lineNumber: 23
-                                    },
-                                    __self: this,
-                                    children: [
-                                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                            className: "label",
-                                            __source: {
-                                                fileName: "src/components/author-view/author-view.jsx",
-                                                lineNumber: 24
-                                            },
-                                            __self: this,
-                                            children: "Origin: "
-                                        }),
-                                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                                            className: "value",
-                                            __source: {
-                                                fileName: "src/components/author-view/author-view.jsx",
-                                                lineNumber: 25
-                                            },
-                                            __self: this,
-                                            children: Author.Origin
-                                        })
-                                    ]
-                                }),
-                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
-                                    onClick: ()=>{
-                                        onBackClick();
-                                    },
-                                    __source: {
-                                        fileName: "src/components/author-view/author-view.jsx",
-                                        lineNumber: 27
-                                    },
-                                    __self: this,
-                                    children: "Back"
-                                })
-                            ]
+                            children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
+                                __source: {
+                                    fileName: "src/components/author-view/author-view.jsx",
+                                    lineNumber: 19
+                                },
+                                __self: this,
+                                children: [
+                                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Title, {
+                                        className: "author-name",
+                                        __source: {
+                                            fileName: "src/components/author-view/author-view.jsx",
+                                            lineNumber: 20
+                                        },
+                                        __self: this,
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                                className: "label",
+                                                __source: {
+                                                    fileName: "src/components/author-view/author-view.jsx",
+                                                    lineNumber: 21
+                                                },
+                                                __self: this,
+                                                children: "Name: "
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                                className: "value",
+                                                __source: {
+                                                    fileName: "src/components/author-view/author-view.jsx",
+                                                    lineNumber: 22
+                                                },
+                                                __self: this,
+                                                children: author.Name
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Text, {
+                                        className: "author-origin",
+                                        __source: {
+                                            fileName: "src/components/author-view/author-view.jsx",
+                                            lineNumber: 24
+                                        },
+                                        __self: this,
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                                className: "label",
+                                                __source: {
+                                                    fileName: "src/components/author-view/author-view.jsx",
+                                                    lineNumber: 25
+                                                },
+                                                __self: this,
+                                                children: "Origin: "
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                                                className: "value",
+                                                __source: {
+                                                    fileName: "src/components/author-view/author-view.jsx",
+                                                    lineNumber: 26
+                                                },
+                                                __self: this,
+                                                children: author.Origin
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                        variant: "secondary",
+                                        onClick: ()=>{
+                                            onBackClick();
+                                        },
+                                        __source: {
+                                            fileName: "src/components/author-view/author-view.jsx",
+                                            lineNumber: 28
+                                        },
+                                        __self: this,
+                                        children: "Back"
+                                    })
+                                ]
+                            })
                         })
                     })
                 })
@@ -45260,7 +45306,7 @@ class AuthorView extends _reactDefault.default.Component {
     }
 }
 AuthorView.propTypes = {
-    Author: _propTypesDefault.default.shape({
+    author: _propTypesDefault.default.shape({
         Name: _propTypesDefault.default.string.isRequired,
         Origin: _propTypesDefault.default.string.isRequired
     }).isRequired,
@@ -45293,7 +45339,7 @@ var _publisherViewScss = require("./publisher-view.scss");
 var _reactBootstrap = require("react-bootstrap");
 class PublisherView extends _reactDefault.default.Component {
     render() {
-        const { Publisher , onBackClick  } = this.props;
+        const { publisher , onBackClick  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Container, {
             fluid: true,
             style: {
@@ -45353,7 +45399,7 @@ class PublisherView extends _reactDefault.default.Component {
                                                 lineNumber: 21
                                             },
                                             __self: this,
-                                            children: Publisher.Name
+                                            children: publisher.Name
                                         })
                                     ]
                                 }),
@@ -45381,7 +45427,7 @@ class PublisherView extends _reactDefault.default.Component {
                                                 lineNumber: 25
                                             },
                                             __self: this,
-                                            children: Publisher.OLanguage
+                                            children: publisher.OLanguage
                                         })
                                     ]
                                 }),
@@ -45409,11 +45455,12 @@ class PublisherView extends _reactDefault.default.Component {
                                                 lineNumber: 29
                                             },
                                             __self: this,
-                                            children: Publisher.OLanguage
+                                            children: publisher.ReleaseYear
                                         })
                                     ]
                                 }),
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                    variant: "secondary",
                                     onClick: ()=>{
                                         onBackClick();
                                     },
@@ -45433,10 +45480,10 @@ class PublisherView extends _reactDefault.default.Component {
     }
 }
 PublisherView.propTypes = {
-    Publisher: _propTypesDefault.default.shape({
+    publisher: _propTypesDefault.default.shape({
         Name: _propTypesDefault.default.string.isRequired,
         OLanguage: _propTypesDefault.default.string.isRequired,
-        ReleaseYear: _propTypesDefault.default.string.isRequired
+        ReleaseYear: _propTypesDefault.default.number.isRequired
     }).isRequired,
     onBackClick: _propTypesDefault.default.func.isRequired
 };
@@ -45465,7 +45512,7 @@ var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _reactBootstrap = require("react-bootstrap");
 var _favoriteBooksView = require("./favorite-books-view");
 var _updateUserView = require("./update-user-view");
-/* import { UserInfoView } from './update-user-view'; */ var _profileViewScss = require("./profile-view.scss");
+var _profileViewScss = require("./profile-view.scss");
 var _s = $RefreshSig$();
 function ProfileView(props) {
     _s();
@@ -45474,6 +45521,10 @@ function ProfileView(props) {
     const [favoriteBooks, setFavoriteBooks] = _react.useState([]);
     const currentUser = localStorage.getItem('user');
     const token = localStorage.getItem('token');
+    console.log(books);
+    _react.useEffect(()=>{
+        getUser();
+    }, []);
     const getUser = ()=>{
         _axiosDefault.default.get(`https://your-favorite-books.herokuapp.com/users/${currentUser}`, {
             headers: {
@@ -45482,12 +45533,11 @@ function ProfileView(props) {
         }).then((response)=>{
             setUser(response.data);
             setFavoriteBooks(response.data.favoriteBooks);
+            setBooks(response.data.books);
+            console.log(response.data);
         }).catch((error)=>console.error(error)
         );
     };
-    _react.useEffect(()=>{
-        getUser();
-    }, []);
     const handleDelete = ()=>{
         _axiosDefault.default.delete(`https://your-favorite-books.herokuapp.com/users/${currentUser}`, {
             headers: {
@@ -45504,7 +45554,7 @@ function ProfileView(props) {
         id: "profile-form",
         __source: {
             fileName: "src/components/profile-view/profile-view.jsx",
-            lineNumber: 46
+            lineNumber: 48
         },
         __self: this,
         children: [
@@ -45512,197 +45562,67 @@ function ProfileView(props) {
                 className: "mt-5",
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 47
+                    lineNumber: 49
                 },
                 __self: this,
                 children: [
                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                        sm: "10",
+                        md: "8",
+                        lg: "6",
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 48
+                            lineNumber: 50
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.CardGroup, {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 49
+                                lineNumber: 51
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 50
+                                    lineNumber: 52
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 51
+                                        lineNumber: 53
                                     },
                                     __self: this,
                                     children: [
                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 52
+                                                lineNumber: 54
                                             },
                                             __self: this,
-                                            children: "MY PROFILE"
+                                            children: "MY INFO: "
                                         }),
-                                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
+                                        /*#__PURE__*/ _jsxRuntime.jsxs("p", {
+                                            className: "mt-4",
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 53
+                                                lineNumber: 55
                                             },
                                             __self: this,
                                             children: [
-                                                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
-                                                    controlId: "formUsername",
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 54
-                                                    },
-                                                    __self: this,
-                                                    children: [
-                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
-                                                            __source: {
-                                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 55
-                                                            },
-                                                            __self: this,
-                                                            children: "Username:"
-                                                        }),
-                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
-                                                            type: "text",
-                                                            value: user.Username,
-                                                            __source: {
-                                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 56
-                                                            },
-                                                            __self: this
-                                                        })
-                                                    ]
-                                                }),
-                                                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
-                                                    className: "mt-3",
-                                                    controlId: "formPassword",
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 61
-                                                    },
-                                                    __self: this,
-                                                    children: [
-                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
-                                                            __source: {
-                                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 62
-                                                            },
-                                                            __self: this,
-                                                            children: "Password:"
-                                                        }),
-                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
-                                                            type: "password",
-                                                            value: '******',
-                                                            __source: {
-                                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 63
-                                                            },
-                                                            __self: this
-                                                        })
-                                                    ]
-                                                }),
-                                                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
-                                                    className: "mt-3",
-                                                    controlId: "formEmail",
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 68
-                                                    },
-                                                    __self: this,
-                                                    children: [
-                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
-                                                            __source: {
-                                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 69
-                                                            },
-                                                            __self: this,
-                                                            children: "E-mail address:"
-                                                        }),
-                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
-                                                            type: "email",
-                                                            value: user.Email,
-                                                            __source: {
-                                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 70
-                                                            },
-                                                            __self: this
-                                                        })
-                                                    ]
-                                                }),
-                                                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
-                                                    className: "mt-3",
-                                                    controlId: "formBirthday",
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 75
-                                                    },
-                                                    __self: this,
-                                                    children: [
-                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
-                                                            __source: {
-                                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 76
-                                                            },
-                                                            __self: this,
-                                                            children: "Birthday:"
-                                                        }),
-                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
-                                                            type: "text",
-                                                            value: user.Birthday,
-                                                            placeholder: "YYY-MM-DD",
-                                                            __source: {
-                                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 77
-                                                            },
-                                                            __self: this
-                                                        })
-                                                    ]
-                                                }),
-                                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
-                                                    className: "mt-5",
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 82
-                                                    },
-                                                    __self: this,
-                                                    children: /*#__PURE__*/ _jsxRuntime.jsx("h4", {
-                                                        __source: {
-                                                            fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 82
-                                                        },
-                                                        __self: this,
-                                                        children: "My Favorite Books"
-                                                    })
-                                                }),
-                                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Group, {
-                                                    className: "mt-3",
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 83
-                                                    },
-                                                    __self: this,
-                                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_favoriteBooksView.FavoriteBooksView, {
-                                                        books: books,
-                                                        favoriteBooks: favoriteBooks,
-                                                        currentUser: currentUser,
-                                                        token: token,
-                                                        __source: {
-                                                            fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 84
-                                                        },
-                                                        __self: this
-                                                    })
-                                                })
+                                                "Name: ",
+                                                user.Username
+                                            ]
+                                        }),
+                                        /*#__PURE__*/ _jsxRuntime.jsxs("p", {
+                                            __source: {
+                                                fileName: "src/components/profile-view/profile-view.jsx",
+                                                lineNumber: 56
+                                            },
+                                            __self: this,
+                                            children: [
+                                                "E-mail: ",
+                                                user.Email
                                             ]
                                         })
                                     ]
@@ -45713,31 +45633,68 @@ function ProfileView(props) {
                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 97
+                            lineNumber: 61
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_updateUserView.UpdateUserView, {
                             user: user,
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 98
+                                lineNumber: 62
                             },
                             __self: this
                         })
                     })
                 ]
             }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                className: "mt-5",
+                __source: {
+                    fileName: "src/components/profile-view/profile-view.jsx",
+                    lineNumber: 65
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx("h4", {
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 65
+                    },
+                    __self: this,
+                    children: "My Favorite Books"
+                })
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Group, {
+                className: "mt-3",
+                __source: {
+                    fileName: "src/components/profile-view/profile-view.jsx",
+                    lineNumber: 66
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_favoriteBooksView.FavoriteBooksView, {
+                    books: books,
+                    favoriteBooks: favoriteBooks,
+                    currentUser: currentUser,
+                    token: token,
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 67
+                    },
+                    __self: this
+                })
+            }),
             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                 style: {
                     marginTop: 100,
-                    marginBottom: 50
+                    marginBottom: 50,
+                    marginRight: 30
                 },
                 className: "mt-5",
                 variant: "warning",
+                size: "sm",
                 onClick: handleDelete,
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 105
+                    lineNumber: 74
                 },
                 __self: this,
                 children: "Delete Profile"
@@ -45755,7 +45712,165 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","react-bootstrap":"h2YVd","./update-user-view":"8wABw","./profile-view.scss":"gb0ga","@parcel/transformer-js/src/esmodule-helpers.js":"jBlWO","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"k8W1d","./favorite-books-view":"fDPbM"}],"8wABw":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","react-bootstrap":"h2YVd","./favorite-books-view":"fDPbM","./update-user-view":"8wABw","./profile-view.scss":"gb0ga","@parcel/transformer-js/src/esmodule-helpers.js":"jBlWO","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"k8W1d"}],"fDPbM":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$4759 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$4759.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "FavoriteBooksView", ()=>FavoriteBooksView
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _reactRouterDom = require("react-router-dom");
+var _reactBootstrap = require("react-bootstrap");
+var _profileViewScss = require("./profile-view.scss");
+function FavoriteBooksView(props) {
+    const { books , favoriteBooks , currentUser , token  } = props;
+    const favoriteBooksId = favoriteBooks.map((m)=>m._id
+    );
+    const favoriteBooksList = books.filter((m)=>{
+        return favoriteBooksId.includes(m._id);
+    });
+    const handleBookDelete = (bookId)=>{
+        _axiosDefault.default.delete(`https://your-favorite-books.herokuapp.com/users/${currentUser}/books/${bookId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(()=>{
+            alert(`The book was successfully deleted.`);
+            window.open('/users/:username', '_self');
+        }).catch((error)=>console.error(error)
+        );
+    };
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_react.Fragment, {
+        __source: {
+            fileName: "src/components/profile-view/favorite-books-view.jsx",
+            lineNumber: 31
+        },
+        __self: this,
+        children: favoriteBooksList.length === 0 ? /*#__PURE__*/ _jsxRuntime.jsx("p", {
+            __source: {
+                fileName: "src/components/profile-view/favorite-books-view.jsx",
+                lineNumber: 33
+            },
+            __self: this,
+            children: "You have no favorite books yet."
+        }) : favoriteBooksList.map((book)=>{
+            return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                xs: 10,
+                sm: 8,
+                md: 6,
+                lg: 4,
+                __source: {
+                    fileName: "src/components/profile-view/favorite-books-view.jsx",
+                    lineNumber: 38
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card, {
+                    __source: {
+                        fileName: "src/components/profile-view/favorite-books-view.jsx",
+                        lineNumber: 39
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                            to: `/books/${book._id}`,
+                            __source: {
+                                fileName: "src/components/profile-view/favorite-books-view.jsx",
+                                lineNumber: 40
+                            },
+                            __self: this,
+                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Img, {
+                                variant: "top",
+                                src: book.CoverURL,
+                                __source: {
+                                    fileName: "src/components/profile-view/favorite-books-view.jsx",
+                                    lineNumber: 41
+                                },
+                                __self: this
+                            })
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
+                            __source: {
+                                fileName: "src/components/profile-view/favorite-books-view.jsx",
+                                lineNumber: 43
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
+                                    __source: {
+                                        fileName: "src/components/profile-view/favorite-books-view.jsx",
+                                        lineNumber: 44
+                                    },
+                                    __self: this,
+                                    children: book.Title
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Text, {
+                                    __source: {
+                                        fileName: "src/components/profile-view/favorite-books-view.jsx",
+                                        lineNumber: 45
+                                    },
+                                    __self: this,
+                                    children: book.Description
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                    to: `/books/${book._id}`,
+                                    __source: {
+                                        fileName: "src/components/profile-view/favorite-books-view.jsx",
+                                        lineNumber: 46
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                        className: "button",
+                                        variant: "outline-primary",
+                                        size: "sm",
+                                        __source: {
+                                            fileName: "src/components/profile-view/favorite-books-view.jsx",
+                                            lineNumber: 47
+                                        },
+                                        __self: this,
+                                        children: "Open"
+                                    })
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                    className: "button ml-2",
+                                    variant: "outline-primary",
+                                    size: "sm",
+                                    onClick: ()=>{
+                                        handleBookDelete(book._id);
+                                    },
+                                    __source: {
+                                        fileName: "src/components/profile-view/favorite-books-view.jsx",
+                                        lineNumber: 49
+                                    },
+                                    __self: this,
+                                    children: "Remove"
+                                })
+                            ]
+                        })
+                    ]
+                })
+            }));
+        })
+    }));
+}
+_c = FavoriteBooksView;
+var _c;
+$RefreshReg$(_c, "FavoriteBooksView");
+
+  $parcel$ReactRefreshHelpers$4759.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","react-router-dom":"cpyQW","react-bootstrap":"h2YVd","./profile-view.scss":"gb0ga","@parcel/transformer-js/src/esmodule-helpers.js":"jBlWO","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"k8W1d"}],"gb0ga":[function() {},{}],"8wABw":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$a60f = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -45808,10 +45923,10 @@ function UpdateUserView(props) {
                 passwordErr: 'Password required'
             });
             isReq = false;
-        } else if (password.length < 6) {
+        } else if (password.length < 5) {
             setValues({
                 ...values,
-                passwordErr: 'Password must be at least 6 characters long'
+                passwordErr: 'Password must be at least 5 characters long'
             });
             isReq = false;
         }
@@ -45969,8 +46084,8 @@ function UpdateUserView(props) {
                                                     onChange: (e)=>setPassword(e.target.value)
                                                     ,
                                                     required: true,
-                                                    minLength: "8",
-                                                    placeholder: "Password must be 6 or more characters",
+                                                    minLength: "5",
+                                                    placeholder: "Password must be 5 or more characters",
                                                     __source: {
                                                         fileName: "src/components/profile-view/update-user-view.jsx",
                                                         lineNumber: 95
@@ -46099,167 +46214,6 @@ $RefreshReg$(_c, "UpdateUserView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","react-bootstrap":"h2YVd","./profile-view.scss":"gb0ga","@parcel/transformer-js/src/esmodule-helpers.js":"jBlWO","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"k8W1d"}],"gb0ga":[function() {},{}],"gb0ga":[function() {},{}],"fDPbM":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$4759 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$4759.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "FavoriteBooksView", ()=>FavoriteBooksView
-);
-var _jsxRuntime = require("react/jsx-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-var _axios = require("axios");
-var _axiosDefault = parcelHelpers.interopDefault(_axios);
-var _reactRouterDom = require("react-router-dom");
-var _reactBootstrap = require("react-bootstrap");
-var _profileViewScss = require("./profile-view.scss");
-function FavoriteBooksView(props) {
-    const { books , favoriteBooks , currentUser , token  } = props;
-    const favoriteBooksId = favoriteBooks.map((m)=>m._id
-    );
-    const favoriteBooksList = books.filter((m)=>{
-        return favoriteBooksId.includes(m._id);
-    });
-    const handleBookDelete = (bookId)=>{
-        _axiosDefault.default.delete(`https://your-favorite-books.herokuapp.com/users/${currentUser}/books/${bookId}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then(()=>{
-            alert(`The book was successfully deleted.`);
-            window.open('/users/:username', '_self');
-        }).catch((error)=>console.error(error)
-        );
-    };
-    return(/*#__PURE__*/ _jsxRuntime.jsx(_react.Fragment, {
-        __source: {
-            fileName: "src/components/profile-view/favorite-books-view.jsx",
-            lineNumber: 31
-        },
-        __self: this,
-        children: favoriteBooksList.length === 0 ? /*#__PURE__*/ _jsxRuntime.jsx("p", {
-            __source: {
-                fileName: "src/components/profile-view/favorite-books-view.jsx",
-                lineNumber: 33
-            },
-            __self: this,
-            children: "You have no favorite books yet."
-        }) : favoriteBooksList.map((book)=>{
-            return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
-                xs: 10,
-                sm: 8,
-                md: 6,
-                lg: 4,
-                __source: {
-                    fileName: "src/components/profile-view/favorite-books-view.jsx",
-                    lineNumber: 37
-                },
-                __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card, {
-                    id: "book-card",
-                    __source: {
-                        fileName: "src/components/profile-view/favorite-books-view.jsx",
-                        lineNumber: 38
-                    },
-                    __self: this,
-                    children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                            to: `/books/${book._id}`,
-                            __source: {
-                                fileName: "src/components/profile-view/favorite-books-view.jsx",
-                                lineNumber: 39
-                            },
-                            __self: this,
-                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Img, {
-                                variant: "top",
-                                src: book.CoverURL,
-                                __source: {
-                                    fileName: "src/components/profile-view/favorite-books-view.jsx",
-                                    lineNumber: 40
-                                },
-                                __self: this
-                            })
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
-                            __source: {
-                                fileName: "src/components/profile-view/favorite-books-view.jsx",
-                                lineNumber: 42
-                            },
-                            __self: this,
-                            children: [
-                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
-                                    __source: {
-                                        fileName: "src/components/profile-view/favorite-books-view.jsx",
-                                        lineNumber: 43
-                                    },
-                                    __self: this,
-                                    children: book.Title
-                                }),
-                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Text, {
-                                    __source: {
-                                        fileName: "src/components/profile-view/favorite-books-view.jsx",
-                                        lineNumber: 44
-                                    },
-                                    __self: this,
-                                    children: book.Description
-                                }),
-                                /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                    to: `/books/${book._id}`,
-                                    __source: {
-                                        fileName: "src/components/profile-view/favorite-books-view.jsx",
-                                        lineNumber: 45
-                                    },
-                                    __self: this,
-                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
-                                        className: "button",
-                                        variant: "outline-primary",
-                                        size: "sm",
-                                        __source: {
-                                            fileName: "src/components/profile-view/favorite-books-view.jsx",
-                                            lineNumber: 46
-                                        },
-                                        __self: this,
-                                        children: "Open"
-                                    })
-                                }),
-                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
-                                    className: "button ml-2",
-                                    variant: "outline-primary",
-                                    size: "sm",
-                                    onClick: ()=>{
-                                        handleBookDelete(book._id);
-                                    },
-                                    __source: {
-                                        fileName: "src/components/profile-view/favorite-books-view.jsx",
-                                        lineNumber: 48
-                                    },
-                                    __self: this,
-                                    children: "Remove"
-                                })
-                            ]
-                        })
-                    ]
-                })
-            }));
-        })
-    }));
-}
-_c = FavoriteBooksView;
-var _c;
-$RefreshReg$(_c, "FavoriteBooksView");
-
-  $parcel$ReactRefreshHelpers$4759.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","axios":"iYoWk","react-router-dom":"cpyQW","react-bootstrap":"h2YVd","./profile-view.scss":"gb0ga","@parcel/transformer-js/src/esmodule-helpers.js":"jBlWO","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"k8W1d"}],"gb0ga":[function() {},{}],"jyMAr":[function() {},{}],"jUTZ8":[function() {},{}]},["hoE0Q","l4uEg","dLPEP"], "dLPEP", "parcelRequire71c8")
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","react-bootstrap":"h2YVd","./profile-view.scss":"gb0ga","@parcel/transformer-js/src/esmodule-helpers.js":"jBlWO","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"k8W1d"}],"gb0ga":[function() {},{}],"gb0ga":[function() {},{}],"jyMAr":[function() {},{}],"jUTZ8":[function() {},{}]},["hoE0Q","l4uEg","dLPEP"], "dLPEP", "parcelRequire71c8")
 
 //# sourceMappingURL=index.6701a6e1.js.map

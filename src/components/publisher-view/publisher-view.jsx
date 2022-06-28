@@ -8,7 +8,7 @@ import { Container, Row, Col, Button, Card, CardGroup } from 'react-bootstrap';
 export class PublisherView extends React.Component {
 
   render() {
-    const { Publisher, onBackClick } = this.props;
+    const { publisher, onBackClick } = this.props;
 
     return (
       <Container fluid style={{ paddingTop: '.75rem' }}>
@@ -18,17 +18,17 @@ export class PublisherView extends React.Component {
               <Card.Body>
                 <Card.Title className='publisher-name'>
                   <span className='label'>Name: </span>
-                  <span className='value'>{Publisher.Name}</span>
+                  <span className='value'>{publisher.Name}</span>
                 </Card.Title>
                 <Card.Text className='publisher-olanguage'>
                   <span className='label'>Original Language: </span>
-                  <span className='value'>{Publisher.OLanguage}</span>
+                  <span className='value'>{publisher.OLanguage}</span>
                 </Card.Text>
                 <Card.Text className='publisher-releaseyear'>
                   <span className='label'>Release Year: </span>
-                  <span className='value'>{Publisher.OLanguage}</span>
+                  <span className='value'>{publisher.ReleaseYear}</span>
                 </Card.Text>
-                <Button onClick={() => { onBackClick(); }}>Back</Button>
+                <Button variant='secondary' onClick={() => { onBackClick(); }}>Back</Button>
               </Card.Body>
             </Card>
           </CardGroup>
@@ -39,10 +39,10 @@ export class PublisherView extends React.Component {
 }
 
 PublisherView.propTypes = {
-  Publisher: propTypes.shape({
+  publisher: propTypes.shape({
     Name: propTypes.string.isRequired,
     OLanguage: propTypes.string.isRequired,
-    ReleaseYear: propTypes.string.isRequired
+    ReleaseYear: propTypes.number.isRequired
   }).isRequired,
   onBackClick: propTypes.func.isRequired
 };

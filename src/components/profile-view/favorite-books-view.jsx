@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -13,6 +12,7 @@ export function FavoriteBooksView(props) {
   const favoriteBooksId = favoriteBooks.map(m => m._id)
 
   const favoriteBooksList = books.filter(m => {
+
     return favoriteBooksId.includes(m._id)
   })
 
@@ -33,9 +33,10 @@ export function FavoriteBooksView(props) {
         <p>You have no favorite books yet.</p>
       ) : (
         favoriteBooksList.map((book) => {
+
           return (
             <Col xs={10} sm={8} md={6} lg={4} >
-              <Card id="book-card">
+              <Card>
                 <Link to={`/books/${book._id}`}>
                   <Card.Img variant="top" src={book.CoverURL} />
                 </Link>
