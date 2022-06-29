@@ -75,9 +75,9 @@ export class MainView extends React.Component {
               }
               // Before the books have been loaded
               if (books.length === 0) return <div className='main-view' />
-              return books.map(m => (
-                <Col xs={12} md={6} lg={3} key={m._id}>
-                  <BookCard book={m} />
+              return books.map(b => (
+                <Col xs={12} md={6} lg={3} key={b._id}>
+                  <BookCard book={b} />
                 </Col>
               ))
             }} />
@@ -95,7 +95,7 @@ export class MainView extends React.Component {
               </Col>
               if (books.length === 0) return <div className='main-view' />;
               return <Col md={8}>
-                <BookView book={books.find(m => m._id === match.params.booksId)} onBackClick={() => history.goBack()} />
+                <BookView book={books.find(b => b._id === match.params.booksId)} onBackClick={() => history.goBack()} />
               </Col>
             }} />
 
@@ -105,7 +105,7 @@ export class MainView extends React.Component {
               </Col>
               if (books.length === 0) return <div className='main-view' />;
               return <Col sm={6} md={4} lg={3}>
-                <AuthorView author={books.find(m => m.Author.Name === match.params.name).Author} onBackClick={() => history.goBack()} />
+                <AuthorView author={books.find(b => b.Author.Name === match.params.name).Author} onBackClick={() => history.goBack()} />
               </Col>
             }} />
 
@@ -115,7 +115,7 @@ export class MainView extends React.Component {
               </Col>
               if (books.length === 0) return <div className='main-view' />;
               return <Col sm={6} md={4} lg={3}>
-                <PublisherView publisher={books.find(m => m.Publisher.Name === match.params.name).Publisher} onBackClick={() => history.goBack()} />
+                <PublisherView publisher={books.find(b => b.Publisher.Name === match.params.name).Publisher} onBackClick={() => history.goBack()} />
               </Col>
             }} />
 
@@ -123,7 +123,7 @@ export class MainView extends React.Component {
             <Route path={`/users/${user}`} render={({ history }) => {
               if (!user) return <Redirect to='/' />
               return <Col>
-                <ProfileView user={user} onBackClick={() => history.goBack()} />
+                <ProfileView user={user} books={books} onBackClick={() => history.goBack()} />
               </Col>
             }} />
 

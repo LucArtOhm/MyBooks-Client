@@ -25361,14 +25361,14 @@ class MainView extends _reactDefault.default.Component {
                                     if (books.length === 0) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
                                         className: "main-view"
                                     }));
-                                    return books.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                                    return books.map((b)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                                             xs: 12,
                                             md: 6,
                                             lg: 3,
                                             children: /*#__PURE__*/ _jsxRuntime.jsx(_bookCard.BookCard, {
-                                                book: m
+                                                book: b
                                             })
-                                        }, m._id)
+                                        }, b._id)
                                     );
                                 },
                                 __source: {
@@ -25416,7 +25416,7 @@ class MainView extends _reactDefault.default.Component {
                                     return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                                         md: 8,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_bookView.BookView, {
-                                            book: books.find((m)=>m._id === match.params.booksId
+                                            book: books.find((b)=>b._id === match.params.booksId
                                             ),
                                             onBackClick: ()=>history.goBack()
                                         })
@@ -25447,7 +25447,7 @@ class MainView extends _reactDefault.default.Component {
                                         md: 4,
                                         lg: 3,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_authorView.AuthorView, {
-                                            author: books.find((m)=>m.Author.Name === match.params.name
+                                            author: books.find((b)=>b.Author.Name === match.params.name
                                             ).Author,
                                             onBackClick: ()=>history.goBack()
                                         })
@@ -25482,7 +25482,7 @@ class MainView extends _reactDefault.default.Component {
                                         md: 4,
                                         lg: 3,
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_publisherView.PublisherView, {
-                                            publisher: books.find((m)=>m.Publisher.Name === match.params.name
+                                            publisher: books.find((b)=>b.Publisher.Name === match.params.name
                                             ).Publisher,
                                             onBackClick: ()=>history.goBack()
                                         })
@@ -25512,6 +25512,7 @@ class MainView extends _reactDefault.default.Component {
                                     return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_profileView.ProfileView, {
                                             user: user,
+                                            books: books,
                                             onBackClick: ()=>history.goBack()
                                         })
                                     }));
@@ -45670,14 +45671,14 @@ function ProfileView(props) {
                     lineNumber: 66
                 },
                 __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(_favoriteBooksView.FavoriteBooksView, {
+                children: books && favoriteBooks && /*#__PURE__*/ _jsxRuntime.jsx(_favoriteBooksView.FavoriteBooksView, {
                     books: books,
                     favoriteBooks: favoriteBooks,
                     currentUser: currentUser,
                     token: token,
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 67
+                        lineNumber: 69
                     },
                     __self: this
                 })
@@ -45694,7 +45695,7 @@ function ProfileView(props) {
                 onClick: handleDelete,
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 74
+                    lineNumber: 76
                 },
                 __self: this,
                 children: "Delete Profile"
@@ -45733,13 +45734,13 @@ var _reactBootstrap = require("react-bootstrap");
 var _profileViewScss = require("./profile-view.scss");
 function FavoriteBooksView(props) {
     const { books , favoriteBooks , currentUser , token  } = props;
-    const favoriteBooksId = favoriteBooks.map((m)=>m._id
+    const favoriteBooksId = favoriteBooks.map((b)=>b._id
     );
-    const favoriteBooksList = books.filter((m)=>{
-        return favoriteBooksId.includes(m._id);
+    const favoriteBooksList = books.filter((b)=>{
+        return favoriteBooksId.includes(b._id);
     });
     const handleBookDelete = (bookId)=>{
-        _axiosDefault.default.delete(`https://your-favorite-books.herokuapp.com/users/${currentUser}/books/${bookId}`, {
+        _axiosDefault.default.delete(`https://your-favorite-books.herokuapp.com/users/${currentUser}/books/${book_id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -45781,7 +45782,7 @@ function FavoriteBooksView(props) {
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                            to: `/books/${book._id}`,
+                            to: `/books/${book_id}`,
                             __source: {
                                 fileName: "src/components/profile-view/favorite-books-view.jsx",
                                 lineNumber: 40
@@ -45821,7 +45822,7 @@ function FavoriteBooksView(props) {
                                     children: book.Description
                                 }),
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                    to: `/books/${book._id}`,
+                                    to: `/books/${book_id}`,
                                     __source: {
                                         fileName: "src/components/profile-view/favorite-books-view.jsx",
                                         lineNumber: 46
@@ -45844,7 +45845,7 @@ function FavoriteBooksView(props) {
                                     variant: "outline-primary",
                                     size: "sm",
                                     onClick: ()=>{
-                                        handleBookDelete(book._id);
+                                        handleBookDelete(book_id);
                                     },
                                     __source: {
                                         fileName: "src/components/profile-view/favorite-books-view.jsx",

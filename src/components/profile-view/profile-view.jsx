@@ -64,12 +64,14 @@ export function ProfileView(props) {
       </Row>
       <Row className='mt-5'><h4>My Favorite Books</h4></Row>
       <Form.Group className='mt-3'>
-        <FavoriteBooksView
-          books={books}
-          favoriteBooks={favoriteBooks}
-          currentUser={currentUser}
-          token={token} />
-
+        {
+          books && favoriteBooks && (
+            <FavoriteBooksView
+              books={books}
+              favoriteBooks={favoriteBooks}
+              currentUser={currentUser}
+              token={token} />
+          )}
       </Form.Group>
       <Button
         style={{ marginTop: 100, marginBottom: 50, marginRight: 30 }}

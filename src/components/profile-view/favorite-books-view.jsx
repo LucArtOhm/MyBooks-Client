@@ -9,15 +9,15 @@ import './profile-view.scss';
 export function FavoriteBooksView(props) {
   const { books, favoriteBooks, currentUser, token } = props;
 
-  const favoriteBooksId = favoriteBooks.map(m => m._id)
+  const favoriteBooksId = favoriteBooks.map(b => b._id)
 
-  const favoriteBooksList = books.filter(m => {
+  const favoriteBooksList = books.filter(b => {
 
-    return favoriteBooksId.includes(m._id)
+    return favoriteBooksId.includes(b._id)
   })
 
   const handleBookDelete = (bookId) => {
-    axios.delete(`https://your-favorite-books.herokuapp.com/users/${currentUser}/books/${bookId}`, {
+    axios.delete(`https://your-favorite-books.herokuapp.com/users/${currentUser}/books/${book_id}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(() => {
@@ -37,19 +37,19 @@ export function FavoriteBooksView(props) {
           return (
             <Col xs={10} sm={8} md={6} lg={4} >
               <Card>
-                <Link to={`/books/${book._id}`}>
+                <Link to={`/books/${book_id}`}>
                   <Card.Img variant="top" src={book.CoverURL} />
                 </Link>
                 <Card.Body>
                   <Card.Title>{book.Title}</Card.Title>
                   <Card.Text>{book.Description}</Card.Text>
-                  <Link to={`/books/${book._id}`}>
+                  <Link to={`/books/${book_id}`}>
                     <Button className="button" variant="outline-primary" size="sm">Open</Button>
                   </Link>
                   <Button
                     className="button ml-2"
                     variant="outline-primary"
-                    size="sm" onClick={() => { handleBookDelete(book._id) }} >
+                    size="sm" onClick={() => { handleBookDelete(book_id) }} >
                     Remove
                   </Button>
                 </Card.Body>
