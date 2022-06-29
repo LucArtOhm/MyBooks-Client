@@ -16,8 +16,8 @@ export function FavoriteBooksView(props) {
     return favoriteBooksId.includes(b._id)
   })
 
-  const handleBookDelete = (bookId) => {
-    axios.delete(`https://your-favorite-books.herokuapp.com/users/${currentUser}/books/${book_id}`, {
+  const handleBookDelete = (booksId) => {
+    axios.delete(`https://your-favorite-books.herokuapp.com/users/${currentUser}/books/${booksId}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(() => {

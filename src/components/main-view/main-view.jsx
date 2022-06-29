@@ -123,7 +123,7 @@ export class MainView extends React.Component {
             <Route path={`/users/${user}`} render={({ history }) => {
               if (!user) return <Redirect to='/' />
               return <Col>
-                <ProfileView user={user} books={books} onBackClick={() => history.goBack()} />
+                <ProfileView books={books} user={user} onBackClick={() => history.goBack()} />
               </Col>
             }} />
 

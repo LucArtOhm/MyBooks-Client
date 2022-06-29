@@ -25511,8 +25511,8 @@ class MainView extends _reactDefault.default.Component {
                                     }));
                                     return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                                         children: /*#__PURE__*/ _jsxRuntime.jsx(_profileView.ProfileView, {
-                                            user: user,
                                             books: books,
+                                            user: user,
                                             onBackClick: ()=>history.goBack()
                                         })
                                     }));
@@ -45739,8 +45739,8 @@ function FavoriteBooksView(props) {
     const favoriteBooksList = books.filter((b)=>{
         return favoriteBooksId.includes(b._id);
     });
-    const handleBookDelete = (bookId)=>{
-        _axiosDefault.default.delete(`https://your-favorite-books.herokuapp.com/users/${currentUser}/books/${book_id}`, {
+    const handleBookDelete = (booksId)=>{
+        _axiosDefault.default.delete(`https://your-favorite-books.herokuapp.com/users/${currentUser}/books/${booksId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
